@@ -6,3 +6,11 @@ import java.util.Locale
 fun Int.toFormattedNumber(): String {
     return NumberFormat.getNumberInstance(Locale.US).format(this)
 }
+
+fun String.toInitials(): String {
+    return this.trim()
+        .split(" ")
+        .filter { it.isNotEmpty() }
+        .take(2)
+        .joinToString("") { it.first().uppercase() }
+}

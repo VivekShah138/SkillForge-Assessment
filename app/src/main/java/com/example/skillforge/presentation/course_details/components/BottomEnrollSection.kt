@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -20,6 +21,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.skillforge.ui.theme.labelXSmall
 
 @Composable
 fun BottomEnrollSection() {
@@ -30,21 +32,23 @@ fun BottomEnrollSection() {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(20.dp),
+                .padding(20.dp, vertical = 10.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
             Column {
                 Text(
-                    "PRICE",
-                    color = Color.Gray,
-                    fontSize = 12.sp
+                    text = "PRICE",
+                    style = MaterialTheme.typography.labelXSmall.copy(
+                        color = Color.Gray,
+                    )
                 )
 
                 Text(
-                    "Free",
-                    color = Color(0xFF00B8A9),
-                    fontWeight = FontWeight.Bold,
-                    fontSize = 28.sp
+                    text = "Free",
+                    style = MaterialTheme.typography.bodyLarge.copy(
+                        color = Color(0xFF00B8A9),
+                        fontWeight = FontWeight.Bold,
+                    )
                 )
             }
 
@@ -53,9 +57,8 @@ fun BottomEnrollSection() {
             Button(
                 onClick = {},
                 modifier = Modifier
-                    .weight(1f)
-                    .height(56.dp),
-                shape = RoundedCornerShape(18.dp),
+                    .weight(1f),
+                shape = RoundedCornerShape(10.dp),
                 colors = ButtonDefaults.buttonColors(
                     containerColor = Color(0xFF18B8A8)
                 )
