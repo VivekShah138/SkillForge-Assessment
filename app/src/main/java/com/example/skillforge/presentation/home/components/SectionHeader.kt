@@ -35,8 +35,8 @@ fun SectionHeader(
 
         Text(
             text = "See all",
-            style = MaterialTheme.typography.titleMedium.copy(
-                fontWeight = FontWeight.SemiBold,
+            style = MaterialTheme.typography.labelSmall.copy(
+                fontWeight = FontWeight.Bold,
                 color = Color(0xFF00A99D)
             ),
             modifier = Modifier

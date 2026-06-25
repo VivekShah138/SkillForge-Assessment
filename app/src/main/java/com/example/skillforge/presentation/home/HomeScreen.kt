@@ -37,46 +37,52 @@ fun HomeScreen(
     state: HomeStates,
     onEvent: (HomeEvents) -> Unit,
 ) {
-    Surface(
-        modifier = Modifier.fillMaxSize(),
-        color = Color(0xFFF7F7F7)
-    ) {
-        Column(
+    Scaffold(
+        containerColor  = Color(0xFFF7F7F7)
+    ) { paddingValues ->
+        Surface(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(24.dp)
+                .padding(paddingValues = paddingValues),
+            color = Color(0xFFF7F7F7)
         ) {
-            HeaderSection()
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(24.dp)
+            ) {
+                HeaderSection()
 
-            Spacer(modifier = Modifier.height(20.dp))
+                Spacer(modifier = Modifier.height(20.dp))
 
-            CustomSearchBar()
+                CustomSearchBar()
 
-            Spacer(modifier = Modifier.height(28.dp))
+                Spacer(modifier = Modifier.height(28.dp))
 
-            SectionHeader(
-                title = "Categories",
-                onClick = {
+                SectionHeader(
+                    title = "Categories",
+                    onClick = {
 
-                }
-            )
+                    }
+                )
 
-            Spacer(modifier = Modifier.height(16.dp))
+                Spacer(modifier = Modifier.height(16.dp))
 
-            CategoryRow(categories = dummyCategories)
+                CategoryRow(categories = dummyCategories)
 
-            Spacer(modifier = Modifier.height(24.dp))
+                Spacer(modifier = Modifier.height(24.dp))
 
-            SectionHeader(
-                title = "Popular courses",
-                onClick = {
+                SectionHeader(
+                    title = "Popular courses",
+                    onClick = {
 
-                }
-            )
+                    }
+                )
 
-            Spacer(modifier = Modifier.height(16.dp))
+                Spacer(modifier = Modifier.height(16.dp))
 
-            CourseList(courses = dummyCourses)
+                CourseList(courses = dummyCourses)
+            }
         }
     }
 }

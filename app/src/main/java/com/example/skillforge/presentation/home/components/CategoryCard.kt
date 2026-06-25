@@ -23,7 +23,7 @@ import com.example.skillforge.ui.theme.labelXSmall
 @Composable
 fun CategoryCard(category: CategoryModel) {
     Card(
-        modifier = Modifier.width(140.dp),
+        modifier = Modifier.width(140.dp).height(150.dp),
         shape = RoundedCornerShape(18.dp),
         colors = CardDefaults.cardColors(containerColor = Color.White)
     ) {
@@ -53,10 +53,9 @@ fun CategoryCard(category: CategoryModel) {
                     fontWeight = FontWeight.SemiBold,
                     lineHeight = 18.sp
                 ),
-                maxLines = 2
+                maxLines = 2,
+                modifier = Modifier.weight(1f)
             )
-
-            Spacer(modifier = Modifier.height(8.dp))
 
             Text(
                 text = category.courseCount,
