@@ -12,11 +12,13 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.PlayArrow
 import androidx.compose.material.icons.outlined.Lock
 import androidx.compose.material.icons.outlined.PlayArrow
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -26,14 +28,17 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.example.skillforge.domain.model.LessonModel
 import com.example.skillforge.domain.model.dummyLessons
+import com.example.skillforge.ui.theme.labelXSmall
+import com.example.skillforge.ui.theme.titleXSmall
 
 @Composable
 fun LessonCard(lesson: LessonModel) {
     Card(
         modifier = Modifier.fillMaxWidth(),
-        shape = RoundedCornerShape(18.dp),
+        shape = RoundedCornerShape(10.dp),
         colors = CardDefaults.cardColors(containerColor = Color.White)
     ) {
         Row(
@@ -56,9 +61,9 @@ fun LessonCard(lesson: LessonModel) {
                     imageVector = if (!lesson.isFree)
                         Icons.Outlined.Lock
                     else
-                        Icons.Outlined.PlayArrow,
+                        Icons.Default.PlayArrow,
                     contentDescription = null,
-                    tint = if (lesson.isFree) Color.Gray else Color(0xFF00B8A9)
+                    tint = if (!lesson.isFree) Color.Gray else Color(0xFF00B8A9)
                 )
             }
 
@@ -66,14 +71,22 @@ fun LessonCard(lesson: LessonModel) {
 
             Column(modifier = Modifier.weight(1f)) {
                 Text(
-                    lesson.title,
-                    fontWeight = FontWeight.Bold
+                    text = lesson.title,
+                    style = MaterialTheme.typography.titleSmall.copy(
+                        fontWeight = FontWeight.SemiBold,
+                        lineHeight = 18.sp
+                    )
                 )
                 Text(
-                    lesson.durationMinutes.toString(),
-                    color = Color.Gray
+                    text = "${lesson.durationMinutes} min",
+                    style = MaterialTheme.typography.titleXSmall.copy(
+                        fontWeight = FontWeight.Normal,
+                        color = Color.Gray
+                    )
                 )
             }
+
+            Spacer(Modifier.width(10.dp))
 
             if (lesson.isFree) {
                 Box(
@@ -83,8 +96,11 @@ fun LessonCard(lesson: LessonModel) {
                         .padding(horizontal = 10.dp, vertical = 6.dp)
                 ) {
                     Text(
-                        "FREE",
-                        color = Color(0xFF00B8A9)
+                        text = "FREE",
+                        style = MaterialTheme.typography.labelXSmall.copy(
+                            fontWeight = FontWeight.Bold,
+                            color = Color(0xFF00B8A9)
+                        )
                     )
                 }
             }

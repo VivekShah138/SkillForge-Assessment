@@ -14,6 +14,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
 import com.example.skillforge.domain.model.dummyCourses
 import com.example.skillforge.domain.model.dummyLessons
+import com.example.skillforge.ui.theme.labelXSmall
 import com.example.skillforge.ui.theme.titleXSmall
 import com.example.skillforge.utils.toLessonSummary
 
@@ -35,7 +36,7 @@ fun CourseContentHeader(
 
         Text(
             text = lessonsMetadata,
-            style = MaterialTheme.typography.titleXSmall.copy(
+            style = MaterialTheme.typography.labelXSmall.copy(
                 color = Color.Gray,
                 fontWeight = FontWeight.SemiBold,
             )

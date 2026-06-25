@@ -36,6 +36,7 @@ import com.example.skillforge.presentation.course_details.components.InstructorC
 import com.example.skillforge.presentation.course_details.components.LessonCard
 import com.example.skillforge.presentation.course_details.components.LessonList
 import com.example.skillforge.ui.theme.SkillforgeTheme
+import com.example.skillforge.utils.toLessonSummary
 
 @Composable
 fun CourseDetailsRoot(
@@ -72,7 +73,7 @@ fun CourseDetailsScreen(
                     modifier = Modifier
                         .weight(1f)
                         .padding(horizontal = 20.dp)
-//                        .verticalScroll(rememberScrollState())
+                        .verticalScroll(rememberScrollState())
                 ) {
                     Spacer(Modifier.height(18.dp))
 
@@ -94,7 +95,9 @@ fun CourseDetailsScreen(
 
                     Spacer(Modifier.height(20.dp))
 
-                    CourseContentHeader()
+                    CourseContentHeader(
+                        lessonsMetadata = dummyLessons.toLessonSummary()
+                    )
 
                     Spacer(Modifier.height(16.dp))
 
