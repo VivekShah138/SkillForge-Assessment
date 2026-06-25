@@ -11,6 +11,10 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import com.example.skillforge.navigation.Screens
 import com.example.skillforge.presentation.course_details.CourseDetailsRoot
 import com.example.skillforge.presentation.home.HomeRoot
 import com.example.skillforge.ui.theme.SkillforgeTheme
@@ -23,8 +27,20 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             SkillforgeTheme {
-//                HomeRoot()
-                CourseDetailsRoot()
+                val navController = rememberNavController()
+
+                NavHost(
+                    navController = navController,
+                    startDestination = Screens.Home
+                ) {
+                    composable<Screens.Home> {
+                        HomeRoot()
+                    }
+
+                    composable<Screens.CourseDetails> {
+                        CourseDetailsRoot()
+                    }
+                }
             }
         }
     }
