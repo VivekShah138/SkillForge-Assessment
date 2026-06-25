@@ -3,29 +3,42 @@ package com.example.skillforge.presentation.course_details.components
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
+import com.example.skillforge.domain.model.dummyCourses
+import com.example.skillforge.domain.model.dummyLessons
+import com.example.skillforge.ui.theme.titleXSmall
+import com.example.skillforge.utils.toLessonSummary
 
 @Composable
-fun CourseContentHeader() {
+fun CourseContentHeader(
+    lessonsMetadata: String
+) {
     Row(
         modifier = Modifier.fillMaxWidth(),
-        horizontalArrangement = Arrangement.SpaceBetween
+        horizontalArrangement = Arrangement.SpaceBetween,
+        verticalAlignment = Alignment.CenterVertically
     ) {
         Text(
-            "Course content",
-            fontWeight = FontWeight.Bold,
-            fontSize = 22.sp
+            text = "Course content",
+            style = MaterialTheme.typography.titleMedium.copy(
+                fontWeight = FontWeight.Bold,
+            )
         )
 
         Text(
-            "3 lessons · 41 min",
-            color = Color.Gray
+            text = lessonsMetadata,
+            style = MaterialTheme.typography.titleXSmall.copy(
+                color = Color.Gray,
+                fontWeight = FontWeight.SemiBold,
+            )
         )
     }
 }
@@ -33,5 +46,7 @@ fun CourseContentHeader() {
 @Preview(showBackground = true)
 @Composable
 fun HeaderPreview() {
-    CourseContentHeader()
+    CourseContentHeader(
+        lessonsMetadata = dummyLessons.toLessonSummary()
+    )
 }

@@ -72,7 +72,7 @@ fun CourseDetailsScreen(
                     modifier = Modifier
                         .weight(1f)
                         .padding(horizontal = 20.dp)
-                        .verticalScroll(rememberScrollState())
+//                        .verticalScroll(rememberScrollState())
                 ) {
                     Spacer(Modifier.height(18.dp))
 
