@@ -36,7 +36,7 @@ fun HeaderSection() {
 
             Text(
                 text = "Welcome back",
-                style = MaterialTheme.typography.labelMedium.copy(
+                style = MaterialTheme.typography.labelSmall.copy(
                     color = MaterialTheme.colorScheme.outline,
                 )
             )

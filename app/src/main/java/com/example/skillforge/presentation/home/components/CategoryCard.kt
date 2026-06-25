@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -16,11 +17,13 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.skillforge.domain.model.CategoryModel
+import com.example.skillforge.ui.theme.SkillforgeTheme
+import com.example.skillforge.ui.theme.labelXSmall
 
 @Composable
 fun CategoryCard(category: CategoryModel) {
     Card(
-        modifier = Modifier.size(width = 140.dp, height = 120.dp),
+        modifier = Modifier.width(140.dp),
         shape = RoundedCornerShape(18.dp),
         colors = CardDefaults.cardColors(containerColor = Color.White)
     ) {
@@ -45,17 +48,22 @@ fun CategoryCard(category: CategoryModel) {
             Spacer(modifier = Modifier.height(16.dp))
 
             Text(
-                category.title,
-                fontWeight = FontWeight.SemiBold,
+                text = category.title,
+                style = MaterialTheme.typography.titleSmall.copy(
+                    fontWeight = FontWeight.SemiBold,
+                    lineHeight = 18.sp
+                ),
                 maxLines = 2
             )
 
             Spacer(modifier = Modifier.height(8.dp))
 
             Text(
-                category.courseCount,
-                color = Color.Gray,
-                fontSize = 12.sp
+                text = category.courseCount,
+                style = MaterialTheme.typography.labelXSmall.copy(
+                    color = Color.Gray,
+                    fontWeight = FontWeight.SemiBold,
+                )
             )
         }
     }
@@ -64,10 +72,12 @@ fun CategoryCard(category: CategoryModel) {
 @Preview(showBackground = true)
 @Composable
 fun CategoryCardPreview() {
-    CategoryCard(
-        category = CategoryModel(
-            title = "UI/UX Design",
-            courseCount = "24 Courses"
+    SkillforgeTheme {
+        CategoryCard(
+            category = CategoryModel(
+                title = "Android Development",
+                courseCount = "24 Courses"
+            )
         )
-    )
+    }
 }

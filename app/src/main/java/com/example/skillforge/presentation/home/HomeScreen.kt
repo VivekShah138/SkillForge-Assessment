@@ -54,19 +54,25 @@ fun HomeScreen(
 
             Spacer(modifier = Modifier.height(28.dp))
 
-            SectionHeader("Categories")
+            SectionHeader(
+                title = "Categories",
+                onClick = {
+
+                }
+            )
 
             Spacer(modifier = Modifier.height(16.dp))
 
             CategoryRow(categories = dummyCategories)
 
-            Spacer(modifier = Modifier.height(12.dp))
-
-            ScrollIndicator()
-
             Spacer(modifier = Modifier.height(24.dp))
 
-            SectionHeader("Popular courses")
+            SectionHeader(
+                title = "Popular courses",
+                onClick = {
+
+                }
+            )
 
             Spacer(modifier = Modifier.height(16.dp))
 
