@@ -2,8 +2,13 @@ package com.example.skillforge.presentation.home.components
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.AccessTime
+import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -15,6 +20,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.skillforge.domain.model.CourseModel
+import com.example.skillforge.ui.theme.SkillforgeTheme
+import com.example.skillforge.ui.theme.labelXSmall
 
 
 @Composable
@@ -24,6 +31,11 @@ fun CourseCard(course: CourseModel) {
         shape = RoundedCornerShape(18.dp),
         colors = CardDefaults.cardColors(containerColor = Color.White)
     ) {
+        val levelColor = if (course.level == "BEGINNER")
+            Color(0xFF00B8A9)
+        else
+            Color(0xFFFF9800)
+
         Row(
             modifier = Modifier.padding(12.dp)
         ) {
@@ -33,38 +45,70 @@ fun CourseCard(course: CourseModel) {
 
             Column(modifier = Modifier.weight(1f)) {
                 Text(
-                    course.level,
-                    color = if (course.level == "BEGINNER")
-                        Color(0xFF00B8A9)
-                    else
-                        Color(0xFFFF9800),
-                    fontWeight = FontWeight.Bold,
-                    fontSize = 12.sp
+                    text = course.level,
+                    style = MaterialTheme.typography.labelXSmall.copy(
+                        color = levelColor,
+                        fontWeight = FontWeight.Bold,
+                    )
                 )
 
-                Spacer(modifier = Modifier.height(4.dp))
+                Spacer(modifier = Modifier.height(2.dp))
 
                 Text(
-                    course.title,
-                    fontWeight = FontWeight.Bold,
-                    fontSize = 18.sp,
+                    text = course.title,
+                    style = MaterialTheme.typography.titleMedium.copy(
+                        fontWeight = FontWeight.Bold,
+                        lineHeight = 20.sp
+                    ),
                     maxLines = 2,
                     overflow = TextOverflow.Ellipsis
                 )
 
-                Spacer(modifier = Modifier.height(4.dp))
+                Spacer(modifier = Modifier.height(2.dp))
 
                 Text(
-                    course.author,
-                    color = Color.Gray
+                    text = course.author,
+                    style = MaterialTheme.typography.labelSmall.copy(
+                        color = Color.LightGray,
+                    )
                 )
 
-                Spacer(modifier = Modifier.height(8.dp))
+                Spacer(modifier = Modifier.height(4.dp))
 
-                Row(verticalAlignment = Alignment.CenterVertically) {
-                    Text("⭐ ${course.rating}")
+                Row(
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Icon(
+                        imageVector = Icons.Default.Star,
+                        contentDescription = null,
+                        tint = Color(0xFFFF9800),
+                        modifier = Modifier.size(15.dp)
+                    )
+                    Spacer(modifier = Modifier.width(4.dp))
+
+                    Text(
+                        text = course.rating,
+                        style = MaterialTheme.typography.labelSmall.copy(
+                            color = Color.Gray
+                        )
+                    )
+
                     Spacer(modifier = Modifier.width(16.dp))
-                    Text("🕒 ${course.duration}")
+
+                    Icon(
+                        imageVector = Icons.Default.AccessTime,
+                        contentDescription = null,
+                        tint = Color.Gray,
+                        modifier = Modifier.size(15.dp)
+                    )
+                    Spacer(modifier = Modifier.width(4.dp))
+
+                    Text(
+                        text = course.duration,
+                        style = MaterialTheme.typography.labelSmall.copy(
+                            color = Color.Gray
+                        )
+                    )
                 }
             }
         }
@@ -74,13 +118,15 @@ fun CourseCard(course: CourseModel) {
 @Preview(showBackground = true)
 @Composable
 fun CourseCardPreview() {
-    CourseCard(
-        course = CourseModel(
-            title = "Complete UI/UX Design Bootcamp",
-            author = "John Doe",
-            level = "BEGINNER",
-            rating = "4.9",
-            duration = "12h 30m"
+    SkillforgeTheme {
+        CourseCard(
+            course = CourseModel(
+                title = "Complete UI/UX Design Bootcamp",
+                author = "John Doe",
+                level = "BEGINNER",
+                rating = "4.9",
+                duration = "12h"
+            )
         )
-    )
+    }
 }
