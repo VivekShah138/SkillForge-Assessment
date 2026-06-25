@@ -1,31 +1,51 @@
 package com.example.skillforge.presentation.home.components
+
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.sp
+import androidx.compose.ui.unit.dp
 
 @Composable
-fun SectionHeader(title: String) {
+fun SectionHeader(
+    title: String,
+    onClick: () -> Unit
+) {
     Row(
         modifier = Modifier.fillMaxWidth(),
-        horizontalArrangement = Arrangement.SpaceBetween
+        horizontalArrangement = Arrangement.SpaceBetween,
+        verticalAlignment = Alignment.CenterVertically
     ) {
         Text(
-            title,
-            fontWeight = FontWeight.Bold,
-            fontSize = 22.sp
+            text = title,
+            style = MaterialTheme.typography.titleMedium.copy(
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.colorScheme.onBackground
+            ),
         )
 
         Text(
-            "See all",
-            color = Color(0xFF00A99D),
-            fontWeight = FontWeight.SemiBold
+            text = "See all",
+            style = MaterialTheme.typography.titleMedium.copy(
+                fontWeight = FontWeight.SemiBold,
+                color = Color(0xFF00A99D)
+            ),
+            modifier = Modifier
+                .clickable {
+                    onClick()
+                }
+                .padding(
+                    horizontal = 10.dp, vertical = 5.dp
+                )
         )
     }
 }
@@ -33,5 +53,10 @@ fun SectionHeader(title: String) {
 @Preview(showBackground = true)
 @Composable
 fun SectionHeaderPreview() {
-    SectionHeader(title = "Popular Courses")
+    SectionHeader(
+        title = "Popular Courses",
+        onClick = {
+
+        }
+    )
 }

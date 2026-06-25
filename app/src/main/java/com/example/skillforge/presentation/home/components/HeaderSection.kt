@@ -32,6 +32,8 @@ fun HeaderSection() {
         Column(
             modifier = Modifier.weight(1f)
         ) {
+            Spacer(Modifier.height(5.dp))
+
             Text(
                 text = "Welcome back",
                 style = MaterialTheme.typography.labelMedium.copy(
