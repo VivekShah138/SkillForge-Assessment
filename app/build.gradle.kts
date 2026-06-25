@@ -1,3 +1,5 @@
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.compose)
@@ -8,6 +10,13 @@ plugins {
 
     kotlin("plugin.serialization") version "2.2.10"
 }
+
+val localProperties = Properties().apply {
+    load(rootProject.file("local.properties").inputStream())
+}
+
+val baseUrl = localProperties.getProperty("BASE_URL")
+    ?: error("BASE_URL not found in local.properties")
 
 android {
     namespace = "com.example.skillforge"
@@ -21,6 +30,12 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        buildConfigField(
+            "String",
+            "BASE_URL",
+            "\"$baseUrl\""
+        )
     }
 
     buildTypes {
