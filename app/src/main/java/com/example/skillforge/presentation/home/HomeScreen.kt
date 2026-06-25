@@ -16,7 +16,6 @@ import com.example.skillforge.domain.model.dummyCourses
 import com.example.skillforge.presentation.home.components.CategoryRow
 import com.example.skillforge.presentation.home.components.CourseList
 import com.example.skillforge.presentation.home.components.HeaderSection
-import com.example.skillforge.presentation.home.components.ScrollIndicator
 import com.example.skillforge.presentation.home.components.CustomSearchBar
 import com.example.skillforge.presentation.home.components.SectionHeader
 
