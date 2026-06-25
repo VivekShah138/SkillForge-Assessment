@@ -38,7 +38,7 @@ fun CourseCard(
             onClick()
         }
     ) {
-        val levelColor = if (course.level == "BEGINNER")
+        val levelColor = if (course.level.equals("BEGINNER",true))
             Color(0xFF00B8A9)
         else
             Color(0xFFFF9800)
@@ -53,7 +53,7 @@ fun CourseCard(
 
             Column(modifier = Modifier.weight(1f)) {
                 Text(
-                    text = course.level,
+                    text = course.level.uppercase(),
                     style = MaterialTheme.typography.labelXSmall.copy(
                         color = levelColor,
                         fontWeight = FontWeight.Bold,

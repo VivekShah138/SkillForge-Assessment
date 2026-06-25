@@ -20,6 +20,7 @@ import com.example.skillforge.domain.model.data_model.CategoryModel
 import com.example.skillforge.utils.dummyCategories
 import com.example.skillforge.ui.theme.SkillforgeTheme
 import com.example.skillforge.ui.theme.labelXSmall
+import com.example.skillforge.utils.mapper.toColor
 
 @Composable
 fun CategoryCard(category: CategoryModel) {
@@ -34,15 +35,17 @@ fun CategoryCard(category: CategoryModel) {
             Box(
                 modifier = Modifier
                     .size(36.dp)
-                    .clip(RoundedCornerShape(12.dp))
-                    .background(Color(0xFFDDF7F2)),
+                    .clip(RoundedCornerShape(8.dp))
+//                    .background(Color(0xFFDDF7F2)),
+                    .background(category.iconColor.toColor().copy(alpha = 0.25f)),
                 contentAlignment = Alignment.Center
             ) {
                 Box(
                     modifier = Modifier
                         .size(16.dp)
                         .clip(RoundedCornerShape(4.dp))
-                        .background(Color(0xFF2ACB98))
+//                        .background(Color(0xFF2ACB98))
+                        .background(category.iconColor.toColor())
                 )
             }
 

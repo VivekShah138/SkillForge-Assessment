@@ -70,7 +70,7 @@ fun HomeScreen(
 
                 Spacer(modifier = Modifier.height(16.dp))
 
-                CategoryRow(categories = dummyCategories)
+                CategoryRow(categories = state.categoryList)
 
                 Spacer(modifier = Modifier.height(24.dp))
 
@@ -84,7 +84,7 @@ fun HomeScreen(
                 Spacer(modifier = Modifier.height(16.dp))
 
                 CourseList(
-                    courses = dummyCourses,
+                    courses = state.courseList,
                     onClick = {
                         navigateToCourse(it)
                     }
@@ -102,7 +102,10 @@ fun HomeScreen(
 private fun Preview() {
     SkillforgeTheme {
         HomeScreen(
-            state = HomeStates(),
+            state = HomeStates(
+                categoryList = dummyCategories,
+                courseList = dummyCourses
+            ),
             onEvent = {},
             navigateToCourse = {}
 
