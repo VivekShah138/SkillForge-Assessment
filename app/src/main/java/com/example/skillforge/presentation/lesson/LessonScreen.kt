@@ -14,6 +14,7 @@ import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import com.example.skillforge.domain.model.dummyCourses
 import com.example.skillforge.domain.model.dummyLessons
 import com.example.skillforge.presentation.lesson.components.LessonDetailsSection
 import com.example.skillforge.presentation.lesson.components.LessonRow
@@ -49,7 +50,9 @@ fun LessonScreen(
             Column(
                 modifier = Modifier.verticalScroll(rememberScrollState())
             ) {
-                VideoHeader()
+                VideoHeader(
+                    imageUrl = dummyCourses[0].thumbnailUrl
+                )
 
                 Column(
                     modifier = Modifier.padding(20.dp)
