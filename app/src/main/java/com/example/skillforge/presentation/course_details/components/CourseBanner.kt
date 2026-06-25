@@ -24,12 +24,13 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.skillforge.domain.model.CourseModel
 import com.example.skillforge.domain.model.dummyCourses
 import com.example.skillforge.ui.theme.SkillforgeTheme
 
 @Composable
 fun CourseBanner(
-    courseTitle: String, tags: List<String>
+    course: CourseModel
 ) {
     Box(
         modifier = Modifier
@@ -61,7 +62,7 @@ fun CourseBanner(
             Spacer(Modifier.weight(1f))
 
             Text(
-                text = courseTitle,
+                text = course.title,
                 style = MaterialTheme.typography.titleLarge.copy(
                     color = Color.White,
                     fontWeight = FontWeight.ExtraBold,
@@ -72,7 +73,7 @@ fun CourseBanner(
             Spacer(Modifier.height(8.dp))
 
             Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
-                tags.chunked(3).forEach { rowTags ->
+                course.tags.chunked(3).forEach { rowTags ->
                     Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                         rowTags.forEach { tag ->
                             Tag(tag)
@@ -91,7 +92,7 @@ fun CourseBanner(
 fun CourseBannerPreview() {
     SkillforgeTheme {
         CourseBanner(
-            courseTitle = dummyCourses[0].title, tags = dummyCourses[0].tags
+            course = dummyCourses[0]
         )
     }
 }

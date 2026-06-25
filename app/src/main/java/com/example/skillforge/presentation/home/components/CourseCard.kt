@@ -41,7 +41,7 @@ fun CourseCard(course: CourseModel) {
             modifier = Modifier.padding(12.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            CourseThumbnail(course.imageUrl)
+            CourseThumbnail(course.thumbnailUrl)
 
             Spacer(modifier = Modifier.width(12.dp))
 
@@ -69,7 +69,7 @@ fun CourseCard(course: CourseModel) {
                 Spacer(modifier = Modifier.height(2.dp))
 
                 Text(
-                    text = course.author,
+                    text = course.instructor.name,
                     style = MaterialTheme.typography.labelSmall.copy(
                         color = Color.LightGray,
                     )
@@ -89,7 +89,7 @@ fun CourseCard(course: CourseModel) {
                     Spacer(modifier = Modifier.width(4.dp))
 
                     Text(
-                        text = course.rating,
+                        text = course.rating.toString(),
                         style = MaterialTheme.typography.labelSmall.copy(
                             color = Color.Gray
                         )
@@ -106,7 +106,7 @@ fun CourseCard(course: CourseModel) {
                     Spacer(modifier = Modifier.width(4.dp))
 
                     Text(
-                        text = course.duration,
+                        text = course.durationHours.toString(),
                         style = MaterialTheme.typography.labelSmall.copy(
                             color = Color.Gray
                         )

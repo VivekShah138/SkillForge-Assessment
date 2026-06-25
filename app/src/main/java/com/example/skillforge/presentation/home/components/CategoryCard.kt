@@ -49,7 +49,7 @@ fun CategoryCard(category: CategoryModel) {
             Spacer(modifier = Modifier.height(16.dp))
 
             Text(
-                text = category.title,
+                text = category.name,
                 style = MaterialTheme.typography.titleSmall.copy(
                     fontWeight = FontWeight.SemiBold,
                     lineHeight = 18.sp
@@ -59,7 +59,7 @@ fun CategoryCard(category: CategoryModel) {
             )
 
             Text(
-                text = category.courseCount,
+                text = category.courseCount.toString(),
                 style = MaterialTheme.typography.labelXSmall.copy(
                     color = Color.Gray,
                     fontWeight = FontWeight.SemiBold,

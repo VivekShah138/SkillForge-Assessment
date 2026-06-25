@@ -27,6 +27,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.skillforge.domain.model.LessonModel
+import com.example.skillforge.domain.model.dummyLessons
 
 @Composable
 fun LessonCard(lesson: LessonModel) {
@@ -69,7 +70,7 @@ fun LessonCard(lesson: LessonModel) {
                     fontWeight = FontWeight.Bold
                 )
                 Text(
-                    lesson.duration,
+                    lesson.durationMinutes.toString(),
                     color = Color.Gray
                 )
             }
@@ -95,6 +96,6 @@ fun LessonCard(lesson: LessonModel) {
 @Composable
 fun LessonPreview() {
     LessonCard(
-        LessonModel("Welcome & Setup", "8 min", true)
+        dummyLessons[0]
     )
 }

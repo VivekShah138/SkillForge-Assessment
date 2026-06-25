@@ -62,8 +62,7 @@ fun CourseDetailsScreen(
                 modifier = Modifier.fillMaxSize()
             ) {
                 CourseBanner(
-                    courseTitle = dummyCourses[0].title,
-                    tags = dummyCourses[0].tags
+                    course = dummyCourses[0]
                 )
 
                 Column(
@@ -73,7 +72,9 @@ fun CourseDetailsScreen(
                 ) {
                     Spacer(Modifier.height(18.dp))
 
-                    CourseInfoSection()
+                    CourseInfoSection(
+                        course = dummyCourses[0]
+                    )
 
                     Spacer(Modifier.height(18.dp))
 
