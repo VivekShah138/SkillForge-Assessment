@@ -39,7 +39,6 @@ fun VideoHeader(
             contentScale = ContentScale.Crop,
             modifier = Modifier
                 .fillMaxSize()
-                .clip(RoundedCornerShape(14.dp))
                 .align(Alignment.Center),
             loading = {
                 Box(

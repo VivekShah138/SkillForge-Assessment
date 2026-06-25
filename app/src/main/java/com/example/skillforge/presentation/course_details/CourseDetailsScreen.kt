@@ -1,5 +1,6 @@
 package com.example.skillforge.presentation.course_details
 
+import android.widget.Toast
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
@@ -16,8 +17,11 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewModelScope
 import com.example.skillforge.utils.dummyCourses
 import com.example.skillforge.utils.dummyLessons
 import com.example.skillforge.presentation.course_details.components.BottomEnrollSection
@@ -28,7 +32,10 @@ import com.example.skillforge.presentation.course_details.components.Description
 import com.example.skillforge.presentation.course_details.components.InstructorCard
 import com.example.skillforge.presentation.course_details.components.LessonCard
 import com.example.skillforge.presentation.course_details.components.LessonList
+import com.example.skillforge.utils.CourseDetailsNavigationEvent
 import com.example.skillforge.utils.mapper.toLessonSummary
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.SharedFlow
 
 @Composable
 fun CourseDetailsRoot(
@@ -42,7 +49,8 @@ fun CourseDetailsRoot(
         state = state,
         onEvent = viewModel::onEvent,
         onBackClick = onBackClick,
-        onLessonClick = onLessonClick
+        onLessonClick = onLessonClick,
+        courseDetailsNavigationEvent = viewModel.navigationEvent
     )
 }
 
@@ -51,8 +59,28 @@ fun CourseDetailsScreen(
     state: CourseDetailsStates,
     onEvent: (CourseDetailsEvents) -> Unit,
     onBackClick: () -> Unit,
-    onLessonClick: (lessonId: String, courseId: String) -> Unit
+    onLessonClick: (lessonId: String, courseId: String) -> Unit,
+    courseDetailsNavigationEvent: SharedFlow<CourseDetailsNavigationEvent>
 ) {
+    val context = LocalContext.current
+
+    LaunchedEffect(context) {
+        courseDetailsNavigationEvent.collect { event ->
+            when (event) {
+                is CourseDetailsNavigationEvent.OnSuccess -> {
+                    onLessonClick(event.lessonId, event.courseId)
+                }
+
+                is CourseDetailsNavigationEvent.OnFailure -> {
+                    Toast.makeText(
+                        context,
+                        "This lesson is locked 🔒",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            }
+        }
+    }
     Scaffold { paddingValues ->
         Surface(
             modifier = Modifier
@@ -111,11 +139,17 @@ fun CourseDetailsScreen(
                             LessonCard(
                                 lesson = it,
                                 onClick = {
-                                    if(it.isFree){
-                                        onLessonClick(it.id,state.selectedCourse.id)
-                                    }
+                                    onEvent(
+                                        CourseDetailsEvents.OnLessonClick(
+                                            lessonId = it.id,
+                                            courseId = state.selectedCourse.id,
+                                            isFree = it.isFree
+                                        )
+                                    )
                                 }
                             )
+
+                            Spacer(modifier = Modifier.height(12.dp))
                         }
                     }
 
@@ -133,12 +167,9 @@ private fun Preview() {
         CourseDetailsScreen(
             state = CourseDetailsStates(),
             onEvent = {},
-            onBackClick = {
-
-            },
-            onLessonClick = { _, _ ->
-
-            }
+            onBackClick = {},
+            onLessonClick = { _, _ -> },
+            courseDetailsNavigationEvent = MutableSharedFlow()
         )
     }
 }

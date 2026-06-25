@@ -6,10 +6,14 @@ import androidx.lifecycle.viewModelScope
 import androidx.navigation.toRoute
 import com.example.skillforge.domain.usecase.usecase_wrapper.CourseDetailsUseCaseWrapper
 import com.example.skillforge.navigation.Screens
+import com.example.skillforge.utils.CourseDetailsNavigationEvent
 import com.example.skillforge.utils.Logger
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
@@ -25,6 +29,12 @@ class CourseDetailsViewModel @Inject constructor(
     private val _state = MutableStateFlow(CourseDetailsStates())
     val state: StateFlow<CourseDetailsStates> = _state.asStateFlow()
 
+    private val _navigationEvent =
+        MutableSharedFlow<CourseDetailsNavigationEvent>()
+
+    val navigationEvent: SharedFlow<CourseDetailsNavigationEvent> =
+        _navigationEvent.asSharedFlow()
+
     private val route = savedStateHandle.toRoute<Screens.CourseDetails>()
     private val courseId = route.courseId
 
@@ -34,17 +44,42 @@ class CourseDetailsViewModel @Inject constructor(
 
     fun onEvent(events: CourseDetailsEvents) {
         when (events) {
-            else -> TODO("Handle actions")
+            is CourseDetailsEvents.OnLessonClick -> navigate(
+                courseId = events.courseId,
+                lessonId = events.lessonId,
+                isFree = events.isFree
+            )
         }
     }
 
-    fun getData(){
+    private fun navigate(
+        lessonId: String,
+        courseId: String,
+        isFree: Boolean
+    ) {
+        viewModelScope.launch {
+            if (isFree) {
+                _navigationEvent.emit(
+                    CourseDetailsNavigationEvent.OnSuccess(
+                        lessonId = lessonId,
+                        courseId = courseId
+                    )
+                )
+            } else {
+                _navigationEvent.emit(
+                    CourseDetailsNavigationEvent.OnFailure
+                )
+            }
+        }
+    }
+
+    fun getData() {
         viewModelScope.launch {
             val result = courseDetailsUseCaseWrapper.getCategoriesRemoteUseCase()
 
             result.onSuccess { categoryList ->
                 categoryList.forEach { categoryModel ->
-                    val allCourses =  courseDetailsUseCaseWrapper.getCoursesFromCategoriesUseCase(
+                    val allCourses = courseDetailsUseCaseWrapper.getCoursesFromCategoriesUseCase(
                         categories = categoryList
                     )
 
