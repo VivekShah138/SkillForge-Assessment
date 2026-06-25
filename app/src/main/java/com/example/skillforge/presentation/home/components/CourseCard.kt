@@ -37,9 +37,10 @@ fun CourseCard(course: CourseModel) {
             Color(0xFFFF9800)
 
         Row(
-            modifier = Modifier.padding(12.dp)
+            modifier = Modifier.padding(12.dp),
+            verticalAlignment = Alignment.CenterVertically
         ) {
-            CourseThumbnail()
+            CourseThumbnail(course.imageUrl)
 
             Spacer(modifier = Modifier.width(12.dp))
 
@@ -125,7 +126,8 @@ fun CourseCardPreview() {
                 author = "John Doe",
                 level = "BEGINNER",
                 rating = "4.9",
-                duration = "12h"
+                duration = "12h",
+                imageUrl = "https://placehold.co/600x360/0f1720/fbbf24/png?text=Figma+for+Developers"
             )
         )
     }

@@ -27,14 +27,16 @@ fun CourseListPreview() {
             author = "John Doe",
             level = "BEGINNER",
             rating = "4.8",
-            duration = "12h 30m"
+            duration = "12h 30m",
+            imageUrl = "https://placehold.co/600x360/0f1720/fbbf24/png?text=UI%2FUX+Foundations"
         ),
         CourseModel(
             title = "Advanced Android Development",
             author = "Jane Smith",
             level = "INTERMEDIATE",
             rating = "4.7",
-            duration = "18h 10m"
+            duration = "18h 10m",
+            imageUrl = "https://placehold.co/600x360/0f1720/fbbf24/png?text=Figma+for+Developers"
         )
     )
 

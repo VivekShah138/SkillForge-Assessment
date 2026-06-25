@@ -10,7 +10,8 @@ data class CourseModel(
     val title: String,
     val author: String,
     val rating: String,
-    val duration: String
+    val duration: String,
+    val imageUrl: String
 )
 
 val dummyCategories = listOf(
@@ -25,20 +26,23 @@ val dummyCourses = listOf(
         "Kotlin Fundamentals",
         "Aarav Sharma",
         "4.7",
-        "6.5h"
+        "6.5h",
+        imageUrl = "https://placehold.co/600x360/0f1720/fbbf24/png?text=Figma+for+Developers"
     ),
     CourseModel(
         "INTERMEDIATE",
         "Jetpack Compose Essentials",
         "Meera Nair",
         "4.8",
-        "9h"
+        "9h",
+        imageUrl = "https://placehold.co/600x360/0f1720/fbbf24/png?text=Figma+for+Developers"
     ),
     CourseModel(
         "BEGINNER",
         "Node.js from Scratch",
         "Sara Khan",
         "4.5",
-        "7.5h"
+        "7.5h",
+        imageUrl = "https://placehold.co/600x360/0f1720/fbbf24/png?text=Figma+for+Developers"
     )
 )
