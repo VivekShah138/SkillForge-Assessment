@@ -75,7 +75,10 @@ fun HomeScreen(
     }
 }
 
-@Preview
+@Preview(
+    showBackground = true,
+    showSystemUi = true
+)
 @Composable
 private fun Preview() {
     SkillforgeTheme {
