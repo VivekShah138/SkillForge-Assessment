@@ -4,6 +4,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.outlined.Fullscreen
 import androidx.compose.material3.CircularProgressIndicator
@@ -30,40 +31,20 @@ fun VideoHeader(
         modifier = Modifier
             .fillMaxWidth()
             .height(270.dp)
-//            .background(
-//                Brush.verticalGradient(
-//                    listOf(
-//                        Color(0xFF00695C),
-//                        Color(0xFF004D40)
-//                    )
-//                )
-//            )
     ) {
-//        DecorativeCircle(
-//            modifier = Modifier
-//                .size(140.dp)
-//                .align(Alignment.BottomStart)
-//        )
-//
-//        DecorativeCircle(
-//            modifier = Modifier
-//                .size(170.dp)
-//                .align(Alignment.TopEnd)
-//        )
-
         SubcomposeAsyncImage(
             model = imageUrl,
             contentDescription = "Course Thumbnail",
             contentScale = ContentScale.Crop,
             modifier = Modifier
-                .size(width = 92.dp, height = 90.dp)
+                .fillMaxSize()
                 .clip(RoundedCornerShape(14.dp))
                 .align(Alignment.Center),
             loading = {
                 Box(
                     modifier = Modifier
                         .matchParentSize()
-                        .background(Color.LightGray),
+                        .background(Color.Black),
                     contentAlignment = Alignment.Center
                 ) {
                     CircularProgressIndicator()
@@ -73,7 +54,7 @@ fun VideoHeader(
                 Box(
                     modifier = Modifier
                         .matchParentSize()
-                        .background(Color(0xFFE0E0E0)),
+                        .background(Color.Black),
                     contentAlignment = Alignment.Center
                 ) {
                     Text("Failed")
@@ -87,7 +68,7 @@ fun VideoHeader(
                 .padding(16.dp),
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
-            CircleIcon(Icons.Default.ArrowBack)
+            CircleIcon(Icons.AutoMirrored.Filled.ArrowBack)
             CircleIcon(Icons.Outlined.Fullscreen)
         }
 
@@ -96,7 +77,8 @@ fun VideoHeader(
         )
 
         VideoProgress(
-            modifier = Modifier.align(Alignment.BottomCenter)
+            modifier = Modifier.align(Alignment.BottomCenter),
+            durationMinutes = dummyLessons[0].durationMinutes
         )
     }
 }

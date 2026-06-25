@@ -17,6 +17,7 @@ import androidx.navigation.compose.rememberNavController
 import com.example.skillforge.navigation.Screens
 import com.example.skillforge.presentation.course_details.CourseDetailsRoot
 import com.example.skillforge.presentation.home.HomeRoot
+import com.example.skillforge.presentation.lesson.LessonRoot
 import com.example.skillforge.ui.theme.SkillforgeTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -29,26 +30,28 @@ class MainActivity : ComponentActivity() {
             SkillforgeTheme {
                 val navController = rememberNavController()
 
-                NavHost(
-                    navController = navController,
-                    startDestination = Screens.Home
-                ) {
-                    composable<Screens.Home> {
-                        HomeRoot(
-                            navigateToCourse = {
-                                navController.navigate(Screens.CourseDetails(it))
-                            }
-                        )
-                    }
+//                NavHost(
+//                    navController = navController,
+//                    startDestination = Screens.Home
+//                ) {
+//                    composable<Screens.Home> {
+//                        HomeRoot(
+//                            navigateToCourse = {
+//                                navController.navigate(Screens.CourseDetails(it))
+//                            }
+//                        )
+//                    }
+//
+//                    composable<Screens.CourseDetails> {
+//                        CourseDetailsRoot(
+//                            onBackClick = {
+//                                navController.popBackStack()
+//                            }
+//                        )
+//                    }
+//                }
 
-                    composable<Screens.CourseDetails> {
-                        CourseDetailsRoot(
-                            onBackClick = {
-                                navController.popBackStack()
-                            }
-                        )
-                    }
-                }
+                LessonRoot()
             }
         }
     }
