@@ -7,6 +7,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.skillforge.domain.model.CategoryModel
+import com.example.skillforge.domain.model.dummyCategories
 
 @Composable
 fun CategoryRow(categories: List<CategoryModel>) {
@@ -23,20 +24,5 @@ fun CategoryRow(categories: List<CategoryModel>) {
 @Preview(showBackground = true)
 @Composable
 fun CategoryRowPreview() {
-    val categories = listOf(
-        CategoryModel(
-            title = "UI/UX Design",
-            courseCount = "24 Courses"
-        ),
-        CategoryModel(
-            title = "Development",
-            courseCount = "18 Courses"
-        ),
-        CategoryModel(
-            title = "Marketing",
-            courseCount = "12 Courses"
-        )
-    )
-
-    CategoryRow(categories = categories)
+    CategoryRow(categories = dummyCategories)
 }

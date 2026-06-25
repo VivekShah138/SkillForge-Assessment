@@ -1,8 +1,11 @@
 package com.example.skillforge.domain.model
 
+import androidx.compose.ui.graphics.Color
+
 data class CategoryModel(
     val title: String,
-    val courseCount: String
+    val courseCount: String,
+    val iconColor: Color
 )
 
 data class CourseModel(
@@ -15,9 +18,9 @@ data class CourseModel(
 )
 
 val dummyCategories = listOf(
-    CategoryModel("Android Development", "2 courses"),
-    CategoryModel("Backend & APIs", "2 courses"),
-    CategoryModel("UI/UX Design", "4 courses")
+    CategoryModel("Android Development", "2 courses", Color(0XFF2dd4bf)),
+    CategoryModel("Backend & APIs", "2 courses", Color(0XFFFBBF24)),
+    CategoryModel("UI/UX Design", "4 courses", Color(0XFF34d399))
 )
 
 val dummyCourses = listOf(

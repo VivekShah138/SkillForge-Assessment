@@ -17,6 +17,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.skillforge.domain.model.CategoryModel
+import com.example.skillforge.domain.model.dummyCategories
 import com.example.skillforge.ui.theme.SkillforgeTheme
 import com.example.skillforge.ui.theme.labelXSmall
 
@@ -73,10 +74,7 @@ fun CategoryCard(category: CategoryModel) {
 fun CategoryCardPreview() {
     SkillforgeTheme {
         CategoryCard(
-            category = CategoryModel(
-                title = "Android Development",
-                courseCount = "24 Courses"
-            )
+            category = dummyCategories[0]
         )
     }
 }
