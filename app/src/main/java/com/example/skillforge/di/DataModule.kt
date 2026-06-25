@@ -17,7 +17,7 @@ object DataModule {
 
     @Provides
     @Singleton
-    fun provideSignalApi(): CategoryApi{
+    fun provideCategoryApi(): CategoryApi{
         return Retrofit.Builder()
             .baseUrl(Constants.BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
