@@ -34,7 +34,11 @@ class MainActivity : ComponentActivity() {
                     startDestination = Screens.Home
                 ) {
                     composable<Screens.Home> {
-                        HomeRoot()
+                        HomeRoot(
+                            navigateToCourse = {
+                                navController.navigate(Screens.CourseDetails(it))
+                            }
+                        )
                     }
 
                     composable<Screens.CourseDetails> {

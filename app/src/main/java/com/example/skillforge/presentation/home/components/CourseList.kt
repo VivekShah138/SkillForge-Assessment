@@ -12,12 +12,20 @@ import com.example.skillforge.domain.model.CourseModel
 import com.example.skillforge.domain.model.dummyCourses
 
 @Composable
-fun CourseList(courses: List<CourseModel>) {
+fun CourseList(
+    courses: List<CourseModel>,
+    onClick: (courseId: String) -> Unit
+) {
     LazyColumn(
         verticalArrangement = Arrangement.spacedBy(14.dp)
     ) {
         items(courses) {
-            CourseCard(it)
+            CourseCard(
+                course = it,
+                onClick = {
+                    onClick(it.id)
+                }
+            )
         }
     }
 }
@@ -27,5 +35,10 @@ fun CourseList(courses: List<CourseModel>) {
 fun CourseListPreview() {
     val courses = dummyCourses
 
-    CourseList(courses = courses)
+    CourseList(
+        courses = courses,
+        onClick = {
+
+        }
+    )
 }

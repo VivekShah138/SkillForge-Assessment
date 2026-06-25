@@ -21,13 +21,15 @@ import com.example.skillforge.presentation.home.components.SectionHeader
 
 @Composable
 fun HomeRoot(
-    viewModel: HomeViewModel = hiltViewModel()
+    viewModel: HomeViewModel = hiltViewModel(),
+    navigateToCourse: (courseId: String) -> Unit
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
 
     HomeScreen(
         state = state,
-        onEvent = viewModel::onEvent
+        onEvent = viewModel::onEvent,
+        navigateToCourse = navigateToCourse
     )
 }
 
@@ -35,9 +37,10 @@ fun HomeRoot(
 fun HomeScreen(
     state: HomeStates,
     onEvent: (HomeEvents) -> Unit,
+    navigateToCourse: (courseId: String) -> Unit
 ) {
     Scaffold(
-        containerColor  = Color(0xFFF7F7F7)
+        containerColor = Color(0xFFF7F7F7)
     ) { paddingValues ->
         Surface(
             modifier = Modifier
@@ -80,7 +83,12 @@ fun HomeScreen(
 
                 Spacer(modifier = Modifier.height(16.dp))
 
-                CourseList(courses = dummyCourses)
+                CourseList(
+                    courses = dummyCourses,
+                    onClick = {
+                        navigateToCourse(it)
+                    }
+                )
             }
         }
     }
@@ -95,7 +103,9 @@ private fun Preview() {
     SkillforgeTheme {
         HomeScreen(
             state = HomeStates(),
-            onEvent = {}
+            onEvent = {},
+            navigateToCourse = {}
+
         )
     }
 }

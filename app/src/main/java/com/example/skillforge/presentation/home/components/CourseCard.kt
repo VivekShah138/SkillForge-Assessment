@@ -26,11 +26,17 @@ import com.example.skillforge.ui.theme.labelXSmall
 
 
 @Composable
-fun CourseCard(course: CourseModel) {
+fun CourseCard(
+    course: CourseModel,
+    onClick: () -> Unit
+) {
     Card(
         modifier = Modifier.fillMaxWidth(),
         shape = RoundedCornerShape(18.dp),
-        colors = CardDefaults.cardColors(containerColor = Color.White)
+        colors = CardDefaults.cardColors(containerColor = Color.White),
+        onClick = {
+            onClick()
+        }
     ) {
         val levelColor = if (course.level == "BEGINNER")
             Color(0xFF00B8A9)
@@ -122,7 +128,10 @@ fun CourseCard(course: CourseModel) {
 fun CourseCardPreview() {
     SkillforgeTheme {
         CourseCard(
-            course = dummyCourses[0]
+            course = dummyCourses[0],
+            onClick = {
+
+            }
         )
     }
 }
