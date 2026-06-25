@@ -20,6 +20,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.skillforge.ui.theme.SkillforgeTheme
 
 @Composable
 fun HeaderSection() {
@@ -40,7 +41,7 @@ fun HeaderSection() {
 
             Text(
                 text = "Find your next skill",
-                style = MaterialTheme.typography.titleLarge.copy(
+                style = MaterialTheme.typography.titleMedium.copy(
                     color = MaterialTheme.colorScheme.onBackground,
                     fontWeight = FontWeight.Bold
                 )
@@ -82,11 +83,13 @@ fun HeaderSection() {
 @Preview(showBackground = true)
 @Composable
 fun HeaderSectionPreview() {
-    Box(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(16.dp)
-    ) {
-        HeaderSection()
+    SkillforgeTheme {
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(16.dp)
+        ) {
+            HeaderSection()
+        }
     }
 }
