@@ -1,11 +1,24 @@
 package com.example.skillforge.presentation.lesson
 
+import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.skillforge.ui.theme.SkillforgeTheme
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.Surface
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.dp
+import com.example.skillforge.domain.model.dummyLessons
+import com.example.skillforge.presentation.lesson.components.LessonDetailsSection
+import com.example.skillforge.presentation.lesson.components.LessonRow
+import com.example.skillforge.presentation.lesson.components.LessonTabs
+import com.example.skillforge.presentation.lesson.components.VideoHeader
 
 @Composable
 fun LessonRoot(
@@ -24,7 +37,43 @@ fun LessonScreen(
     state: LessonStates,
     onEvent: (LessonEvents) -> Unit,
 ) {
+    Scaffold(
 
+    ) { paddingValues ->
+        Surface(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(paddingValues = paddingValues),
+            color = Color(0xFFF8F8F8)
+        ) {
+            Column(
+                modifier = Modifier.verticalScroll(rememberScrollState())
+            ) {
+                VideoHeader()
+
+                Column(
+                    modifier = Modifier.padding(20.dp)
+                ) {
+                    LessonDetailsSection()
+
+                    Spacer(modifier = Modifier.height(20.dp))
+
+                    LessonTabs()
+
+                    Spacer(modifier = Modifier.height(16.dp))
+
+                    dummyLessons.forEach {
+                        LessonRow(
+                            it,
+                            lessonId = dummyLessons[0].id
+                        )
+                        Spacer(modifier = Modifier.height(12.dp))
+                    }
+                }
+            }
+        }
+
+    }
 }
 
 @Preview
