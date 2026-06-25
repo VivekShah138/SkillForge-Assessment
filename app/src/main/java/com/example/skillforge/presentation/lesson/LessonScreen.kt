@@ -17,6 +17,7 @@ import androidx.compose.ui.unit.dp
 import com.example.skillforge.domain.model.dummyCourses
 import com.example.skillforge.domain.model.dummyLessons
 import com.example.skillforge.presentation.lesson.components.LessonDetailsSection
+import com.example.skillforge.presentation.lesson.components.LessonList
 import com.example.skillforge.presentation.lesson.components.LessonRow
 import com.example.skillforge.presentation.lesson.components.LessonTabs
 import com.example.skillforge.presentation.lesson.components.VideoHeader
@@ -47,9 +48,7 @@ fun LessonScreen(
                 .padding(paddingValues = paddingValues),
             color = Color(0xFFF8F8F8)
         ) {
-            Column(
-                modifier = Modifier.verticalScroll(rememberScrollState())
-            ) {
+            Column {
                 VideoHeader(
                     imageUrl = dummyCourses[0].thumbnailUrl
                 )
@@ -57,7 +56,9 @@ fun LessonScreen(
                 Column(
                     modifier = Modifier.padding(20.dp)
                 ) {
-                    LessonDetailsSection()
+                    LessonDetailsSection(
+                        lessonModel = dummyLessons[0]
+                    )
 
                     Spacer(modifier = Modifier.height(20.dp))
 
@@ -65,13 +66,7 @@ fun LessonScreen(
 
                     Spacer(modifier = Modifier.height(16.dp))
 
-                    dummyLessons.forEach {
-                        LessonRow(
-                            it,
-                            lessonId = dummyLessons[0].id
-                        )
-                        Spacer(modifier = Modifier.height(12.dp))
-                    }
+                    LessonList(dummyLessons)
                 }
             }
         }

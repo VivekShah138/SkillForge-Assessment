@@ -1,6 +1,7 @@
 package com.example.skillforge.presentation.lesson.components
 
 import androidx.compose.foundation.layout.*
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -9,30 +10,40 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.skillforge.domain.model.LessonModel
+import com.example.skillforge.domain.model.dummyLessons
 
 @Composable
-fun LessonDetailsSection() {
+fun LessonDetailsSection(
+    lessonModel: LessonModel
+) {
     Column {
         Text(
-            "LESSON 1 · KOTLIN FUNDAMENTALS",
-            color = Color(0xFF00B8A9),
-            fontWeight = FontWeight.Bold
+            text = formatLesson(1,"Kotlin Fundamentals"),
+            style = MaterialTheme.typography.titleSmall.copy(
+                color = Color(0xFF00B8A9),
+                fontWeight = FontWeight.Bold
+            ),
         )
 
-        Spacer(Modifier.height(12.dp))
+        Spacer(Modifier.height(4.dp))
 
         Text(
-            "Welcome & Setup",
-            fontSize = 34.sp,
-            fontWeight = FontWeight.Bold
+            text = lessonModel.title,
+            style = MaterialTheme.typography.titleLarge.copy(
+                fontWeight = FontWeight.Bold,
+                lineHeight = 30.sp
+            )
         )
 
-        Spacer(Modifier.height(12.dp))
+        Spacer(Modifier.height(4.dp))
 
         Text(
-            "Set up Android Studio and run your first Kotlin file.",
-            color = Color.Gray,
-            fontSize = 18.sp
+            text = lessonModel.content,
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontWeight = FontWeight.Normal,
+                color = Color.Gray,
+            )
         )
     }
 }
@@ -40,5 +51,11 @@ fun LessonDetailsSection() {
 @Preview(showBackground = true)
 @Composable
 fun LessonDetailsPreview() {
-    LessonDetailsSection()
+    LessonDetailsSection(
+        lessonModel = dummyLessons[0]
+    )
+}
+
+fun formatLesson(index: Int, courseName: String): String {
+    return "LESSON ${index + 1}: $courseName"
 }

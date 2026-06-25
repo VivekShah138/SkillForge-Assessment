@@ -25,7 +25,7 @@ fun LessonTabs() {
 
         Box(
             modifier = Modifier
-                .width(55.dp)
+                .width(60.dp)
                 .height(3.dp)
                 .background(Color(0xFF00B8A9))
         )

@@ -16,13 +16,15 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.example.skillforge.domain.model.LessonModel
 import com.example.skillforge.domain.model.dummyLessons
+import com.example.skillforge.ui.theme.labelXSmall
 
 
 @Composable
-fun LessonRow(item: LessonModel, lessonId: String) {
-    val isCurrent = lessonId == item.id
+fun LessonRow(lesson: LessonModel, lessonId: String) {
+    val isCurrent = lessonId == lesson.id
     Card(
         shape = RoundedCornerShape(18.dp),
         colors = CardDefaults.cardColors(
@@ -50,7 +52,7 @@ fun LessonRow(item: LessonModel, lessonId: String) {
                 Icon(
                     imageVector = when {
                         isCurrent -> Icons.Default.Pause
-                        !item.isFree -> Icons.Outlined.Lock
+                        !lesson.isFree -> Icons.Outlined.Lock
                         else -> Icons.Outlined.PlayArrow
                     },
                     contentDescription = null,
@@ -61,18 +63,30 @@ fun LessonRow(item: LessonModel, lessonId: String) {
             Spacer(Modifier.width(14.dp))
 
             Column(modifier = Modifier.weight(1f)) {
-                Text(item.title, fontWeight = FontWeight.Bold)
+                Text(
+                    text = lesson.title,
+                    style = MaterialTheme.typography.titleSmall.copy(
+                        fontWeight = FontWeight.Bold,
+                        lineHeight = 18.sp
+                    )
+                )
 
                 Text(
                     if (isCurrent)
-                        "Now playing · ${item.durationMinutes} min"
+                        "Now playing · ${lesson.durationMinutes} min"
                     else
-                        "${item.durationMinutes} min",
-                    color = Color.Gray
+                        "${lesson.durationMinutes} min",
+                    style = MaterialTheme.typography.labelSmall.copy(
+                        fontWeight = FontWeight.SemiBold,
+                        color = Color.Gray
+                    )
+
                 )
             }
 
-            if (item.isFree) {
+            Spacer(Modifier.width(10.dp))
+
+            if (lesson.isFree) {
                 Box(
                     modifier = Modifier
                         .background(
@@ -82,8 +96,11 @@ fun LessonRow(item: LessonModel, lessonId: String) {
                         .padding(horizontal = 10.dp, vertical = 6.dp)
                 ) {
                     Text(
-                        "FREE",
-                        color = Color(0xFF00B8A9)
+                        text = "FREE",
+                        style = MaterialTheme.typography.labelXSmall.copy(
+                            fontWeight = FontWeight.SemiBold,
+                            color = Color(0xFF00B8A9)
+                        )
                     )
                 }
             }
