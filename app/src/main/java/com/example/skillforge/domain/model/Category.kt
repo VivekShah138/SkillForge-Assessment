@@ -62,58 +62,18 @@ import androidx.core.graphics.toColorInt
 
 // -------------------- CATEGORY --------------------
 
-data class CategoryModel(
-    val id: String,
-    val name: String,
-    val description: String,
-    val iconColor: String,
-    val courseCount: Int,
-    val courses: List<CourseModel>
-)
 
 // -------------------- COURSE --------------------
 
-data class CourseModel(
-    val id: String,
-    val title: String,
-    val subtitle: String,
-    val thumbnailUrl: String,
-    val level: String,
-    val durationHours: Double,
-    val rating: Double,
-    val studentsEnrolled: Int,
-    val language: String,
-    val lastUpdated: String,
-    val tags: List<String>,
-    val instructor: InstructorModel,
-    val description: String,
-    val lessons: List<LessonModel>
-)
+
 
 // -------------------- INSTRUCTOR --------------------
 
-data class InstructorModel(
-    val id: String,
-    val name: String,
-    val title: String,
-    val avatarUrl: String,
-    val bio: String
-)
+
 
 // -------------------- LESSON --------------------
 
-data class LessonModel(
-    val id: String,
-    val title: String,
-    val durationMinutes: Int,
-    val isFree: Boolean,
-    val videoUrl: String,
-    val content: String
-)
 
-fun String.toColor(): Color {
-    return Color(this.toColorInt())
-}
 
 val dummyCategories = listOf(
     CategoryModel(

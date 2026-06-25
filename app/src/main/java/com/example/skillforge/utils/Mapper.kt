@@ -1,6 +1,8 @@
 package com.example.skillforge.utils
 
-import com.example.skillforge.domain.model.LessonModel
+import androidx.compose.ui.graphics.Color
+import androidx.core.graphics.toColorInt
+import com.example.skillforge.domain.model.data_model.LessonModel
 import java.text.NumberFormat
 import java.util.Locale
 
@@ -22,4 +24,8 @@ fun List<LessonModel>.toLessonSummary(): String {
     val lessonText = if (count == 1) "lesson" else "lessons"
 
     return "$count lessons • $totalMinutes min"
+}
+
+fun String.toColor(): Color {
+    return Color(this.toColorInt())
 }
