@@ -34,6 +34,7 @@ import com.example.skillforge.presentation.course_details.components.CourseInfoS
 import com.example.skillforge.presentation.course_details.components.DescriptionSection
 import com.example.skillforge.presentation.course_details.components.InstructorCard
 import com.example.skillforge.presentation.course_details.components.LessonCard
+import com.example.skillforge.presentation.course_details.components.LessonList
 import com.example.skillforge.ui.theme.SkillforgeTheme
 
 @Composable
@@ -85,20 +86,19 @@ fun CourseDetailsScreen(
                         instructorModel = dummyCourses[0].instructor
                     )
 
+                    Spacer(Modifier.height(15.dp))
+
+                    DescriptionSection(
+                        description = dummyCourses[0].description
+                    )
+
                     Spacer(Modifier.height(20.dp))
-
-                    DescriptionSection()
-
-                    Spacer(Modifier.height(24.dp))
 
                     CourseContentHeader()
 
                     Spacer(Modifier.height(16.dp))
 
-                    dummyLessons.forEach {
-                        LessonCard(it)
-                        Spacer(Modifier.height(12.dp))
-                    }
+                    LessonList(lessons = dummyLessons)
                 }
 
                 BottomEnrollSection()

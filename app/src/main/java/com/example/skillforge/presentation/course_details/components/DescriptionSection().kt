@@ -1,21 +1,26 @@
 package com.example.skillforge.presentation.course_details.components
 
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
+import com.example.skillforge.domain.model.dummyCourses
 
 @Composable
-fun DescriptionSection() {
+fun DescriptionSection(
+    description: String
+) {
     Text(
-        text = "Start from zero and learn Kotlin's syntax, null safety, collections, and functions. By the end you'll be comfortable reading and writing idiomatic Kotlin.",
-        fontSize = 16.sp,
-        lineHeight = 28.sp
+        text = description,
+        style = MaterialTheme.typography.bodySmall
     )
 }
 
 @Preview(showBackground = true)
 @Composable
 fun DescriptionPreview() {
-    DescriptionSection()
+    DescriptionSection(
+        description = dummyCourses[0].description
+    )
 }

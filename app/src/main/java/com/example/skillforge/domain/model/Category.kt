@@ -60,7 +60,6 @@ import androidx.core.graphics.toColorInt
 //)
 
 
-
 // -------------------- CATEGORY --------------------
 
 data class CategoryModel(
@@ -144,7 +143,6 @@ val dummyCategories = listOf(
 )
 
 
-
 val dummyCourses = listOf(
     CourseModel(
         id = "course_1",
@@ -165,7 +163,7 @@ val dummyCourses = listOf(
             avatarUrl = "https://placehold.co/200x200",
             bio = "Android dev with Kotlin experience"
         ),
-        description = "Learn Kotlin step by step",
+        description = "Start from zero and learn Kotlin's syntax, null safety, collections, and functions. By the end you'll be comfortable reading and writing idiomatic Kotlin.",
         lessons = emptyList()
     ),
 
