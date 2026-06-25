@@ -25,7 +25,8 @@ import com.example.skillforge.utils.dummyLessons
 fun VideoHeader(
     imageUrl: String,
     onBackClick: () -> Unit,
-    onFullScreenClick: () -> Unit
+    onFullScreenClick: () -> Unit,
+    selectedLessonDuration: Int
 ) {
     Box(
         modifier = Modifier
@@ -88,7 +89,7 @@ fun VideoHeader(
 
         VideoProgress(
             modifier = Modifier.align(Alignment.BottomCenter),
-            durationMinutes = dummyLessons[0].durationMinutes
+            durationMinutes = selectedLessonDuration
         )
     }
 }
@@ -105,6 +106,7 @@ fun VideoHeaderPreview() {
         },
         onFullScreenClick = {
 
-        }
+        },
+        selectedLessonDuration = dummyLessons[0].durationMinutes
     )
 }

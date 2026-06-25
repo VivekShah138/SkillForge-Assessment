@@ -17,14 +17,7 @@ fun LessonList(
     Column(
         verticalArrangement = Arrangement.spacedBy(12.dp)
     ) {
-        lessons.forEach {
-            LessonCard(
-                it,
-                onClick = {
-                    onLessonClick(it.id)
-                }
-            )
-        }
+
     }
 }
 

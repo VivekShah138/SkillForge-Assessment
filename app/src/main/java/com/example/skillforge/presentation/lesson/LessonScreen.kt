@@ -48,31 +48,39 @@ fun LessonScreen(
                 .padding(paddingValues = paddingValues),
             color = Color(0xFFF8F8F8)
         ) {
-            Column {
-                VideoHeader(
-                    imageUrl = dummyCourses[0].thumbnailUrl,
-                    onBackClick = {
-                        navigateToPreviousScreen()
-                    },
-                    onFullScreenClick = {
+            if (state.selectedLesson != null && state.selectedCourse != null) {
+                Column {
+                    VideoHeader(
+                        imageUrl = state.selectedCourse.thumbnailUrl,
+                        onBackClick = {
+                            navigateToPreviousScreen()
+                        },
+                        onFullScreenClick = {
 
-                    },
-                )
-
-                Column(
-                    modifier = Modifier.padding(20.dp)
-                ) {
-                    LessonDetailsSection(
-                        lessonModel = dummyLessons[0]
+                        },
+                        selectedLessonDuration = state.selectedLesson.lesson.durationMinutes
                     )
 
-                    Spacer(modifier = Modifier.height(20.dp))
+                    Column(
+                        modifier = Modifier.padding(20.dp)
+                    ) {
+                        LessonDetailsSection(
+                            lessonModel = state.selectedLesson.lesson,
+                            selectedLessonIndex = state.selectedLesson.index,
+                            selectedCourseTitle = state.selectedCourse.title
+                        )
 
-                    LessonTabs()
+                        Spacer(modifier = Modifier.height(20.dp))
 
-                    Spacer(modifier = Modifier.height(16.dp))
+                        LessonTabs()
 
-                    LessonList(dummyLessons)
+                        Spacer(modifier = Modifier.height(16.dp))
+
+                        LessonList(
+                            lessons = state.selectedCourse.lessons,
+                            selectedLessonId = state.selectedLesson.lesson.id
+                        )
+                    }
                 }
             }
         }
@@ -88,7 +96,7 @@ private fun Preview() {
             state = LessonStates(),
             onEvent = {},
             navigateToPreviousScreen = {
-                
+
             }
         )
     }

@@ -26,6 +26,7 @@ import com.example.skillforge.presentation.course_details.components.CourseConte
 import com.example.skillforge.presentation.course_details.components.CourseInfoSection
 import com.example.skillforge.presentation.course_details.components.DescriptionSection
 import com.example.skillforge.presentation.course_details.components.InstructorCard
+import com.example.skillforge.presentation.course_details.components.LessonCard
 import com.example.skillforge.presentation.course_details.components.LessonList
 import com.example.skillforge.utils.mapper.toLessonSummary
 
@@ -77,6 +78,7 @@ fun CourseDetailsScreen(
                         modifier = Modifier
                             .weight(1f)
                             .padding(horizontal = 20.dp)
+                            .padding(bottom = 10.dp)
                             .verticalScroll(rememberScrollState())
                     ) {
                         Spacer(Modifier.height(18.dp))
@@ -105,15 +107,16 @@ fun CourseDetailsScreen(
 
                         Spacer(Modifier.height(16.dp))
 
-                        LessonList(
-                            lessons = state.selectedCourse.lessons,
-                            onLessonClick = {
-                                onLessonClick(
-                                    it,
-                                    state.selectedCourse.id
-                                )
-                            }
-                        )
+                        state.selectedCourse.lessons.forEach {
+                            LessonCard(
+                                lesson = it,
+                                onClick = {
+                                    if(it.isFree){
+                                        onLessonClick(it.id,state.selectedCourse.id)
+                                    }
+                                }
+                            )
+                        }
                     }
 
                     BottomEnrollSection()

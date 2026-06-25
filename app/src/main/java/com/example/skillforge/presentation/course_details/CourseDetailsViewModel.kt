@@ -60,7 +60,7 @@ class CourseDetailsViewModel @Inject constructor(
 
                 }
             }.onFailure { error ->
-                Logger.e(Logger.Tag.HOME_VIEWMODEL, "Error => ${error.localizedMessage}")
+                Logger.e(Logger.Tag.COURSE_DETAILS_VIEWMODEL, "Error => ${error.localizedMessage}")
             }
         }
     }

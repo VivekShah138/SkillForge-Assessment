@@ -13,13 +13,14 @@ import com.example.skillforge.utils.dummyLessons
 
 @Composable
 fun LessonList(
-    lessons: List<LessonModel>
+    lessons: List<LessonModel>,
+    selectedLessonId: String
 ) {
     LazyColumn {
         items(lessons) { lesson ->
             LessonRow(
                 lesson = lesson,
-                lessonId = dummyLessons[0].id
+                lessonId = selectedLessonId
             )
 
             Spacer(modifier = Modifier.height(12.dp))
@@ -31,6 +32,7 @@ fun LessonList(
 @Composable
 fun LessonListPreview() {
     LessonList(
-        dummyLessons
+        dummyLessons,
+        selectedLessonId = dummyLessons[0].id
     )
 }

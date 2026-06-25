@@ -11,15 +11,18 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.skillforge.domain.model.data_model.LessonModel
+import com.example.skillforge.utils.dummyCourses
 import com.example.skillforge.utils.dummyLessons
 
 @Composable
 fun LessonDetailsSection(
-    lessonModel: LessonModel
+    lessonModel: LessonModel,
+    selectedLessonIndex: Int,
+    selectedCourseTitle: String
 ) {
     Column {
         Text(
-            text = formatLesson(1,"Kotlin Fundamentals"),
+            text = formatLesson(selectedLessonIndex,selectedCourseTitle),
             style = MaterialTheme.typography.titleSmall.copy(
                 color = Color(0xFF00B8A9),
                 fontWeight = FontWeight.Bold
@@ -52,7 +55,9 @@ fun LessonDetailsSection(
 @Composable
 fun LessonDetailsPreview() {
     LessonDetailsSection(
-        lessonModel = dummyLessons[0]
+        lessonModel = dummyLessons[0],
+        selectedLessonIndex = 1,
+        selectedCourseTitle = dummyCourses[0].title
     )
 }
 
