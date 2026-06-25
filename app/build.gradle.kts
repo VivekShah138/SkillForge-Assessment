@@ -98,4 +98,7 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.10.0")
 
     implementation("io.coil-kt:coil-compose:2.7.0")
+
+    // Logging
+    implementation("com.jakewharton.timber:timber:5.0.1")
 }

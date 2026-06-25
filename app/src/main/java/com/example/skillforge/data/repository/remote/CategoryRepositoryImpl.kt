@@ -14,7 +14,7 @@ class CategoryRepositoryImpl @Inject constructor(
             val response = categoryApi.getAllCategories()
 
             if (response.isSuccessful) {
-                val categories = response.body()
+                val categories = response.body()?.categories
 
                 if (categories != null) {
                     Result.success(
