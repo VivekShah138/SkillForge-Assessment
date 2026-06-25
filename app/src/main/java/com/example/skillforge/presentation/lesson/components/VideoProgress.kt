@@ -16,7 +16,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.skillforge.domain.model.dummyLessons
+import com.example.skillforge.utils.dummyLessons
 import com.example.skillforge.ui.theme.labelXSmall
 
 @OptIn(ExperimentalMaterial3Api::class)

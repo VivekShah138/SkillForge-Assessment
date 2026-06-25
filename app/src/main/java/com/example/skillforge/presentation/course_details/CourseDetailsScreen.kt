@@ -13,30 +13,21 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.skillforge.ui.theme.SkillforgeTheme
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Surface
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.example.skillforge.domain.model.dummyCourses
-import com.example.skillforge.domain.model.dummyLessons
+import com.example.skillforge.utils.dummyCourses
+import com.example.skillforge.utils.dummyLessons
 import com.example.skillforge.presentation.course_details.components.BottomEnrollSection
 import com.example.skillforge.presentation.course_details.components.CourseBanner
 import com.example.skillforge.presentation.course_details.components.CourseContentHeader
 import com.example.skillforge.presentation.course_details.components.CourseInfoSection
 import com.example.skillforge.presentation.course_details.components.DescriptionSection
 import com.example.skillforge.presentation.course_details.components.InstructorCard
-import com.example.skillforge.presentation.course_details.components.LessonCard
 import com.example.skillforge.presentation.course_details.components.LessonList
-import com.example.skillforge.ui.theme.SkillforgeTheme
-import com.example.skillforge.utils.toLessonSummary
+import com.example.skillforge.utils.mapper.toLessonSummary
 
 @Composable
 fun CourseDetailsRoot(

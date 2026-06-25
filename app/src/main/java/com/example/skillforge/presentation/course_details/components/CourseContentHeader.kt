@@ -11,12 +11,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.sp
-import com.example.skillforge.domain.model.dummyCourses
-import com.example.skillforge.domain.model.dummyLessons
+import com.example.skillforge.utils.dummyLessons
 import com.example.skillforge.ui.theme.labelXSmall
-import com.example.skillforge.ui.theme.titleXSmall
-import com.example.skillforge.utils.toLessonSummary
+import com.example.skillforge.utils.mapper.toLessonSummary
 
 @Composable
 fun CourseContentHeader(

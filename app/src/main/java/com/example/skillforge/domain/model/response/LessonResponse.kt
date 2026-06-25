@@ -13,7 +13,7 @@ data class LessonResponse(
     val durationMinutes: String,
 
     @SerializedName("isFree")
-    val isFree: Boolean,
+    val isFree: String,
 
     @SerializedName("videoUrl")
     val videoUrl: String,

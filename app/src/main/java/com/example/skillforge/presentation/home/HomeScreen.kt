@@ -11,8 +11,8 @@ import androidx.compose.material3.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import com.example.skillforge.domain.model.dummyCategories
-import com.example.skillforge.domain.model.dummyCourses
+import com.example.skillforge.utils.dummyCategories
+import com.example.skillforge.utils.dummyCourses
 import com.example.skillforge.presentation.home.components.CategoryRow
 import com.example.skillforge.presentation.home.components.CourseList
 import com.example.skillforge.presentation.home.components.HeaderSection

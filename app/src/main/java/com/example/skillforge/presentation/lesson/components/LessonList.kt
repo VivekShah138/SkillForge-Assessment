@@ -8,8 +8,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.skillforge.domain.model.LessonModel
-import com.example.skillforge.domain.model.dummyLessons
+import com.example.skillforge.domain.model.data_model.LessonModel
+import com.example.skillforge.utils.dummyLessons
 
 @Composable
 fun LessonList(

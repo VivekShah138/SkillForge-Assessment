@@ -12,13 +12,13 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object DataModule {
 
-//    @Provides
-//    @Singleton
-//    fun provideSignalApi(): SignalApi{
-//        return Retrofit.Builder()
-//            .baseUrl(BuildConfig)
-//            .addConverterFactory(GsonConverterFactory.create())
-//            .build()
-//            .create(SignalApi::class.java)
-//    }
+    @Provides
+    @Singleton
+    fun provideSignalApi(): SignalApi{
+        return Retrofit.Builder()
+            .baseUrl(BuildConfig)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+            .create(SignalApi::class.java)
+    }
 }

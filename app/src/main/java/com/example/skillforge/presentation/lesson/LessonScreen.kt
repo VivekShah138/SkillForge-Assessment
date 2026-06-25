@@ -12,8 +12,8 @@ import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import com.example.skillforge.domain.model.dummyCourses
-import com.example.skillforge.domain.model.dummyLessons
+import com.example.skillforge.utils.dummyCourses
+import com.example.skillforge.utils.dummyLessons
 import com.example.skillforge.presentation.lesson.components.LessonDetailsSection
 import com.example.skillforge.presentation.lesson.components.LessonList
 import com.example.skillforge.presentation.lesson.components.LessonTabs

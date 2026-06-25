@@ -1,4 +1,4 @@
-package com.example.skillforge.utils
+package com.example.skillforge.utils.mapper
 
 import androidx.compose.ui.graphics.Color
 import androidx.core.graphics.toColorInt

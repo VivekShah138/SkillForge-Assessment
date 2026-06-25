@@ -4,8 +4,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.sp
-import com.example.skillforge.domain.model.dummyCourses
+import com.example.skillforge.utils.dummyCourses
 
 @Composable
 fun DescriptionSection(
