@@ -10,8 +10,10 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.outlined.BookmarkBorder
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -19,11 +21,16 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.skillforge.domain.model.dummyCourses
+import com.example.skillforge.ui.theme.SkillforgeTheme
 
 @Composable
-fun CourseBanner() {
+fun CourseBanner(
+    courseTitle: String, tags: List<String>
+) {
     Box(
         modifier = Modifier
             .fillMaxWidth()
@@ -31,19 +38,16 @@ fun CourseBanner() {
             .background(
                 Brush.verticalGradient(
                     listOf(
-                        Color(0xFF0BB7A7),
-                        Color(0xFF14C3A4),
-                        Color.White
+                        Color(0xFF0BB7A7), Color(0xFF14C3A4), Color(0xFFF7F7F7)
                     )
                 )
             )
             .padding(16.dp)
     ) {
         Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceBetween
+            modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween
         ) {
-            CircleIconButton(Icons.Default.ArrowBack)
+            CircleIconButton(Icons.AutoMirrored.Filled.ArrowBack)
             CircleIconButton(Icons.Outlined.BookmarkBorder)
         }
 
@@ -51,30 +55,43 @@ fun CourseBanner() {
             modifier = Modifier
                 .align(Alignment.CenterStart)
                 .padding(start = 8.dp)
+                .padding(bottom = 10.dp)
         ) {
-            Text(
-                "// kotlin",
-                color = Color.Black,
-                fontSize = 12.sp
-            )
 
-            Spacer(Modifier.height(12.dp))
+            Spacer(Modifier.weight(1f))
 
             Text(
-                "Kotlin\nFundamentals",
-                color = Color.White,
-                fontSize = 34.sp,
-                fontWeight = FontWeight.ExtraBold,
-                lineHeight = 34.sp
+                text = courseTitle,
+                style = MaterialTheme.typography.titleLarge.copy(
+                    color = Color.White,
+                    fontWeight = FontWeight.ExtraBold,
+                    lineHeight = 34.sp
+                )
             )
 
             Spacer(Modifier.height(8.dp))
 
-            Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                Tag("Kotlin")
-                Tag("Basics")
-                Tag("JVM")
+            Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                tags.chunked(3).forEach { rowTags ->
+                    Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                        rowTags.forEach { tag ->
+                            Tag(tag)
+                        }
+                    }
+                }
             }
         }
+    }
+}
+
+@Preview(
+    showBackground = true
+)
+@Composable
+fun CourseBannerPreview() {
+    SkillforgeTheme {
+        CourseBanner(
+            courseTitle = dummyCourses[0].title, tags = dummyCourses[0].tags
+        )
     }
 }

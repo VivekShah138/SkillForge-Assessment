@@ -23,6 +23,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.example.skillforge.domain.model.dummyCourses
 import com.example.skillforge.domain.model.dummyLessons
 import com.example.skillforge.presentation.course_details.components.BottomEnrollSection
 import com.example.skillforge.presentation.course_details.components.CourseBanner
@@ -60,7 +61,10 @@ fun CourseDetailsScreen(
             Column(
                 modifier = Modifier.fillMaxSize()
             ) {
-                CourseBanner()
+                CourseBanner(
+                    courseTitle = dummyCourses[0].title,
+                    tags = dummyCourses[0].tags
+                )
 
                 Column(
                     modifier = Modifier

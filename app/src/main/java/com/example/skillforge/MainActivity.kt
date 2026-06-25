@@ -11,6 +11,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.example.skillforge.presentation.course_details.CourseDetailsRoot
 import com.example.skillforge.presentation.home.HomeRoot
 import com.example.skillforge.ui.theme.SkillforgeTheme
 import dagger.hilt.android.AndroidEntryPoint
@@ -22,7 +23,8 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             SkillforgeTheme {
-                HomeRoot()
+//                HomeRoot()
+                CourseDetailsRoot()
             }
         }
     }

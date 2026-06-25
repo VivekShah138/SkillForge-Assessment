@@ -14,7 +14,8 @@ data class CourseModel(
     val author: String,
     val rating: String,
     val duration: String,
-    val imageUrl: String
+    val imageUrl: String,
+    val tags: List<String>
 )
 
 val dummyCategories = listOf(
@@ -23,29 +24,33 @@ val dummyCategories = listOf(
     CategoryModel("UI/UX Design", "4 courses", Color(0XFF34d399))
 )
 
+
 val dummyCourses = listOf(
     CourseModel(
-        "BEGINNER",
-        "Kotlin Fundamentals",
-        "Aarav Sharma",
-        "4.7",
-        "6.5h",
-        imageUrl = "https://placehold.co/600x360/0f1720/fbbf24/png?text=Figma+for+Developers"
+        level = "BEGINNER",
+        title = "Kotlin Fundamentals",
+        author = "Aarav Sharma",
+        rating = "4.7",
+        duration = "6.5h",
+        imageUrl = "https://placehold.co/600x360/0f1720/fbbf24/png?text=Kotlin",
+        tags = listOf("Kotlin", "Basics", "JVM")
     ),
     CourseModel(
-        "INTERMEDIATE",
-        "Jetpack Compose Essentials",
-        "Meera Nair",
-        "4.8",
-        "9h",
-        imageUrl = "https://placehold.co/600x360/0f1720/fbbf24/png?text=Figma+for+Developers"
+        level = "INTERMEDIATE",
+        title = "Jetpack Compose Essentials",
+        author = "Meera Nair",
+        rating = "4.8",
+        duration = "9h",
+        imageUrl = "https://placehold.co/600x360/0f1720/fbbf24/png?text=Compose",
+        tags = listOf("Compose", "Android", "UI")
     ),
     CourseModel(
-        "BEGINNER",
-        "Node.js from Scratch",
-        "Sara Khan",
-        "4.5",
-        "7.5h",
-        imageUrl = "https://placehold.co/600x360/0f1720/fbbf24/png?text=Figma+for+Developers"
+        level = "BEGINNER",
+        title = "Node.js from Scratch",
+        author = "Sara Khan",
+        rating = "4.5",
+        duration = "7.5h",
+        imageUrl = "https://placehold.co/600x360/0f1720/fbbf24/png?text=Node",
+        tags = listOf("Node.js", "Backend", "JavaScript")
     )
 )

@@ -9,6 +9,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.skillforge.domain.model.CourseModel
+import com.example.skillforge.domain.model.dummyCourses
 
 @Composable
 fun CourseList(courses: List<CourseModel>) {
@@ -24,24 +25,7 @@ fun CourseList(courses: List<CourseModel>) {
 @Preview(showBackground = true)
 @Composable
 fun CourseListPreview() {
-    val courses = listOf(
-        CourseModel(
-            title = "Complete UI/UX Design",
-            author = "John Doe",
-            level = "BEGINNER",
-            rating = "4.8",
-            duration = "12h 30m",
-            imageUrl = "https://placehold.co/600x360/0f1720/fbbf24/png?text=UI%2FUX+Foundations"
-        ),
-        CourseModel(
-            title = "Advanced Android Development",
-            author = "Jane Smith",
-            level = "INTERMEDIATE",
-            rating = "4.7",
-            duration = "18h 10m",
-            imageUrl = "https://placehold.co/600x360/0f1720/fbbf24/png?text=Figma+for+Developers"
-        )
-    )
+    val courses = dummyCourses
 
     CourseList(courses = courses)
 }

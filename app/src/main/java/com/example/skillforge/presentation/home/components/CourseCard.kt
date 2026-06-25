@@ -20,6 +20,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.skillforge.domain.model.CourseModel
+import com.example.skillforge.domain.model.dummyCourses
 import com.example.skillforge.ui.theme.SkillforgeTheme
 import com.example.skillforge.ui.theme.labelXSmall
 
@@ -121,14 +122,7 @@ fun CourseCard(course: CourseModel) {
 fun CourseCardPreview() {
     SkillforgeTheme {
         CourseCard(
-            course = CourseModel(
-                title = "Complete UI/UX Design Bootcamp",
-                author = "John Doe",
-                level = "BEGINNER",
-                rating = "4.9",
-                duration = "12h",
-                imageUrl = "https://placehold.co/600x360/0f1720/fbbf24/png?text=Figma+for+Developers"
-            )
+            course = dummyCourses[0]
         )
     }
 }
