@@ -2,7 +2,9 @@ package com.example.skillforge.di
 
 import com.example.skillforge.domain.repository.remote.CategoryRepository
 import com.example.skillforge.domain.usecase.remote.GetCategoriesRemoteUseCase
+import com.example.skillforge.domain.usecase.remote.GetCourseByIdUseCase
 import com.example.skillforge.domain.usecase.remote.GetCoursesFromCategoriesUseCase
+import com.example.skillforge.domain.usecase.usecase_wrapper.CourseDetailsUseCaseWrapper
 import com.example.skillforge.domain.usecase.usecase_wrapper.HomeScreenUseCaseWrapper
 import dagger.Module
 import dagger.Provides
@@ -25,6 +27,20 @@ object UseCaseModule {
                 categoryRepository = categoryRepository,
             ),
             getCoursesFromCategoriesUseCase = GetCoursesFromCategoriesUseCase()
+        )
+    }
+
+    @Provides
+    @Singleton
+    fun provideCourseDetailsUseCase(
+        categoryRepository: CategoryRepository
+    ): CourseDetailsUseCaseWrapper {
+        return CourseDetailsUseCaseWrapper(
+            getCategoriesRemoteUseCase = GetCategoriesRemoteUseCase(
+                categoryRepository = categoryRepository,
+            ),
+            getCoursesFromCategoriesUseCase = GetCoursesFromCategoriesUseCase(),
+            getCourseByIdUseCase = GetCourseByIdUseCase()
         )
     }
 }

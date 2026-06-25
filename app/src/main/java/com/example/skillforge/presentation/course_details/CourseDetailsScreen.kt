@@ -59,59 +59,65 @@ fun CourseDetailsScreen(
                 .padding(paddingValues = paddingValues),
             color = Color(0xFFF7F7F7)
         ) {
-            Column(
-                modifier = Modifier.fillMaxSize()
-            ) {
-                CourseBanner(
-                    course = dummyCourses[0],
-                    onBackClick = {
-                        onBackClick()
-                    },
-                    onBookMarkClick = {
-                        // TODO
-                    }
-                )
-
+            if (state.selectedCourse != null) {
                 Column(
-                    modifier = Modifier
-                        .weight(1f)
-                        .padding(horizontal = 20.dp)
-                        .verticalScroll(rememberScrollState())
+                    modifier = Modifier.fillMaxSize()
                 ) {
-                    Spacer(Modifier.height(18.dp))
-
-                    CourseInfoSection(
-                        course = dummyCourses[0]
+                    CourseBanner(
+                        course = state.selectedCourse,
+                        onBackClick = {
+                            onBackClick()
+                        },
+                        onBookMarkClick = {
+                            // TODO
+                        }
                     )
 
-                    Spacer(Modifier.height(18.dp))
+                    Column(
+                        modifier = Modifier
+                            .weight(1f)
+                            .padding(horizontal = 20.dp)
+                            .verticalScroll(rememberScrollState())
+                    ) {
+                        Spacer(Modifier.height(18.dp))
 
-                    InstructorCard(
-                        instructorModel = dummyCourses[0].instructor
-                    )
-
-                    Spacer(Modifier.height(15.dp))
-
-                    DescriptionSection(
-                        description = dummyCourses[0].description
-                    )
-
-                    Spacer(Modifier.height(20.dp))
-
-                    CourseContentHeader(
-                        lessonsMetadata = dummyLessons.toLessonSummary()
-                    )
-
-                    Spacer(Modifier.height(16.dp))
-
-                    LessonList(lessons = dummyLessons, onLessonClick = {
-                        onLessonClick(
-                            it, "1"
+                        CourseInfoSection(
+                            course = state.selectedCourse
                         )
-                    })
-                }
 
-                BottomEnrollSection()
+                        Spacer(Modifier.height(18.dp))
+
+                        InstructorCard(
+                            instructorModel = state.selectedCourse.instructor
+                        )
+
+                        Spacer(Modifier.height(15.dp))
+
+                        DescriptionSection(
+                            description = state.selectedCourse.description
+                        )
+
+                        Spacer(Modifier.height(20.dp))
+
+                        CourseContentHeader(
+                            lessonsMetadata = state.selectedCourse.lessons.toLessonSummary()
+                        )
+
+                        Spacer(Modifier.height(16.dp))
+
+                        LessonList(
+                            lessons = state.selectedCourse.lessons,
+                            onLessonClick = {
+                                onLessonClick(
+                                    it,
+                                    state.selectedCourse.id
+                                )
+                            }
+                        )
+                    }
+
+                    BottomEnrollSection()
+                }
             }
         }
     }
