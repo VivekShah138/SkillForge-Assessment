@@ -40,13 +40,15 @@ import com.example.skillforge.utils.toLessonSummary
 
 @Composable
 fun CourseDetailsRoot(
-    viewModel: CourseDetailsViewModel = hiltViewModel()
+    viewModel: CourseDetailsViewModel = hiltViewModel(),
+    onBackClick: () -> Unit
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
 
     CourseDetailsScreen(
         state = state,
-        onEvent = viewModel::onEvent
+        onEvent = viewModel::onEvent,
+        onBackClick = onBackClick
     )
 }
 
@@ -54,6 +56,7 @@ fun CourseDetailsRoot(
 fun CourseDetailsScreen(
     state: CourseDetailsStates,
     onEvent: (CourseDetailsEvents) -> Unit,
+    onBackClick: () -> Unit
 ) {
     Scaffold { paddingValues ->
         Surface(
@@ -66,7 +69,13 @@ fun CourseDetailsScreen(
                 modifier = Modifier.fillMaxSize()
             ) {
                 CourseBanner(
-                    course = dummyCourses[0]
+                    course = dummyCourses[0],
+                    onBackClick = {
+                        onBackClick()
+                    },
+                    onBookMarkClick = {
+                        // TODO
+                    }
                 )
 
                 Column(
@@ -116,7 +125,10 @@ private fun Preview() {
     SkillforgeTheme {
         CourseDetailsScreen(
             state = CourseDetailsStates(),
-            onEvent = {}
+            onEvent = {},
+            onBackClick = {
+                
+            }
         )
     }
 }

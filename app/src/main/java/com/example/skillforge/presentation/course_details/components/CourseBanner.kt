@@ -30,7 +30,9 @@ import com.example.skillforge.ui.theme.SkillforgeTheme
 
 @Composable
 fun CourseBanner(
-    course: CourseModel
+    course: CourseModel,
+    onBackClick: () -> Unit,
+    onBookMarkClick: () -> Unit
 ) {
     Box(
         modifier = Modifier
@@ -48,8 +50,18 @@ fun CourseBanner(
         Row(
             modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween
         ) {
-            CircleIconButton(Icons.AutoMirrored.Filled.ArrowBack)
-            CircleIconButton(Icons.Outlined.BookmarkBorder)
+            CircleIconButton(
+                icon = Icons.AutoMirrored.Filled.ArrowBack,
+                onClick = {
+                    onBackClick()
+                }
+            )
+            CircleIconButton(
+                icon = Icons.Outlined.BookmarkBorder,
+                onClick = {
+                    onBookMarkClick()
+                }
+            )
         }
 
         Column(
@@ -92,7 +104,13 @@ fun CourseBanner(
 fun CourseBannerPreview() {
     SkillforgeTheme {
         CourseBanner(
-            course = dummyCourses[0]
+            course = dummyCourses[0],
+            onBackClick = {
+
+            },
+            onBookMarkClick = {
+
+            }
         )
     }
 }

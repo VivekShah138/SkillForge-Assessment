@@ -42,7 +42,11 @@ class MainActivity : ComponentActivity() {
                     }
 
                     composable<Screens.CourseDetails> {
-                        CourseDetailsRoot()
+                        CourseDetailsRoot(
+                            onBackClick = {
+                                navController.popBackStack()
+                            }
+                        )
                     }
                 }
             }
