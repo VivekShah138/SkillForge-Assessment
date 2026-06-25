@@ -1,5 +1,6 @@
 package com.example.skillforge.presentation.lesson
 
+import android.widget.Toast
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -7,6 +8,7 @@ import androidx.navigation.toRoute
 import com.example.skillforge.domain.usecase.usecase_wrapper.LessonScreenUseCaseWrapper
 import com.example.skillforge.navigation.Screens
 import com.example.skillforge.utils.CourseDetailsNavigationEvent
+import com.example.skillforge.utils.LessonOnClickEvent
 import com.example.skillforge.utils.Logger
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -29,6 +31,10 @@ class LessonViewModel @Inject constructor(
     private val _state = MutableStateFlow(LessonStates())
     val state: StateFlow<LessonStates> = _state.asStateFlow()
 
+    private val _lessonOnClickEvent = MutableSharedFlow<LessonOnClickEvent>()
+    val lessonOnClickEvent: SharedFlow<LessonOnClickEvent> =
+        _lessonOnClickEvent.asSharedFlow()
+
     private val route = savedStateHandle.toRoute<Screens.CourseLesson>()
     private val courseId = route.courseId
     private val lessonId = route.lessonId
@@ -39,7 +45,12 @@ class LessonViewModel @Inject constructor(
 
     fun onEvent(events: LessonEvents) {
         when (events) {
-            else -> TODO("Handle actions")
+            is LessonEvents.OnClickLesson -> {
+                clickLesson(
+                    lessonId = events.lessonId,
+                    isFree = events.isFree
+                )
+            }
         }
     }
 
@@ -73,6 +84,36 @@ class LessonViewModel @Inject constructor(
 
             }.onFailure { error ->
                 Logger.e(Logger.Tag.LESSON_VIEWMODEL, "Error => ${error.localizedMessage}")
+            }
+        }
+    }
+
+    private fun clickLesson(
+        lessonId: String,
+        isFree: Boolean
+    ) {
+        val selectedCourse = state.value.selectedCourse
+
+        when {
+            selectedCourse != null && isFree -> {
+                val selectedLesson = lessonScreenUseCaseWrapper.getSelectedLessonUseCase(
+                    lessonId = lessonId,
+                    lessonList = selectedCourse.lessons
+                )
+
+                _state.update { it.copy(selectedLesson = selectedLesson) }
+            }
+
+            !isFree -> {
+                viewModelScope.launch {
+                    _lessonOnClickEvent.emit(LessonOnClickEvent.OnFailure("This lesson is locked 🔒"))
+                }
+            }
+
+            else -> {
+                viewModelScope.launch {
+                    _lessonOnClickEvent.emit(LessonOnClickEvent.OnFailure("Error! Please try again later"))
+                }
             }
         }
     }

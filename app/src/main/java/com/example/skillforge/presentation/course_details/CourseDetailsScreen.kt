@@ -31,7 +31,6 @@ import com.example.skillforge.presentation.course_details.components.CourseInfoS
 import com.example.skillforge.presentation.course_details.components.DescriptionSection
 import com.example.skillforge.presentation.course_details.components.InstructorCard
 import com.example.skillforge.presentation.course_details.components.LessonCard
-import com.example.skillforge.presentation.course_details.components.LessonList
 import com.example.skillforge.utils.CourseDetailsNavigationEvent
 import com.example.skillforge.utils.mapper.toLessonSummary
 import kotlinx.coroutines.flow.MutableSharedFlow

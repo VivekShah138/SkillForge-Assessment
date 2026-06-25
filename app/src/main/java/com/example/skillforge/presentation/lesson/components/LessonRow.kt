@@ -23,7 +23,11 @@ import com.example.skillforge.ui.theme.labelXSmall
 
 
 @Composable
-fun LessonRow(lesson: LessonModel, lessonId: String) {
+fun LessonRow(
+    lesson: LessonModel,
+    lessonId: String,
+    onClick: () -> Unit
+) {
     val isCurrent = lessonId == lesson.id
     Card(
         shape = RoundedCornerShape(18.dp),
@@ -33,7 +37,8 @@ fun LessonRow(lesson: LessonModel, lessonId: String) {
             else
                 Color.White
         ),
-        modifier = Modifier.fillMaxWidth()
+        modifier = Modifier.fillMaxWidth(),
+        onClick = onClick
     ) {
         Row(
             modifier = Modifier.padding(16.dp),
@@ -115,7 +120,7 @@ fun LessonRow(lesson: LessonModel, lessonId: String) {
 @Composable
 fun LessonRowPreview() {
     LessonRow(
-        dummyLessons[0], lessonId = "l1"
+        dummyLessons[0], lessonId = "l1", onClick = {}
     )
 }
 

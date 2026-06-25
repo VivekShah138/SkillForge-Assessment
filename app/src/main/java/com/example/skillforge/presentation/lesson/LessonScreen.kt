@@ -1,5 +1,6 @@
 package com.example.skillforge.presentation.lesson
 
+import android.widget.Toast
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -8,16 +9,21 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.skillforge.ui.theme.SkillforgeTheme
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Surface
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
-import com.example.skillforge.utils.dummyCourses
-import com.example.skillforge.utils.dummyLessons
 import com.example.skillforge.presentation.lesson.components.LessonDetailsSection
-import com.example.skillforge.presentation.lesson.components.LessonList
+import com.example.skillforge.presentation.lesson.components.LessonRow
 import com.example.skillforge.presentation.lesson.components.LessonTabs
 import com.example.skillforge.presentation.lesson.components.VideoHeader
+import com.example.skillforge.utils.LessonOnClickEvent
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.SharedFlow
 
 @Composable
 fun LessonRoot(
@@ -29,7 +35,8 @@ fun LessonRoot(
     LessonScreen(
         state = state,
         onEvent = viewModel::onEvent,
-        navigateToPreviousScreen = navigateToPreviousScreen
+        navigateToPreviousScreen = navigateToPreviousScreen,
+        lessonOnClickEvent = viewModel.lessonOnClickEvent
     )
 }
 
@@ -37,11 +44,26 @@ fun LessonRoot(
 fun LessonScreen(
     state: LessonStates,
     onEvent: (LessonEvents) -> Unit,
-    navigateToPreviousScreen: () -> Unit
+    navigateToPreviousScreen: () -> Unit,
+    lessonOnClickEvent: SharedFlow<LessonOnClickEvent>
 ) {
-    Scaffold(
+    val context = LocalContext.current
 
-    ) { paddingValues ->
+    LaunchedEffect(context) {
+        lessonOnClickEvent.collect { event ->
+            when (event) {
+                is LessonOnClickEvent.OnFailure -> {
+                    Toast.makeText(
+                        context,
+                        event.error,
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            }
+        }
+    }
+
+    Scaffold { paddingValues ->
         Surface(
             modifier = Modifier
                 .fillMaxSize()
@@ -76,10 +98,24 @@ fun LessonScreen(
 
                         Spacer(modifier = Modifier.height(16.dp))
 
-                        LessonList(
-                            lessons = state.selectedCourse.lessons,
-                            selectedLessonId = state.selectedLesson.lesson.id
-                        )
+                        LazyColumn {
+                            items(state.selectedCourse.lessons) { lesson ->
+                                LessonRow(
+                                    lesson = lesson,
+                                    lessonId = state.selectedLesson.lesson.id,
+                                    onClick = {
+                                        onEvent(
+                                            LessonEvents.OnClickLesson(
+                                                lessonId = lesson.id,
+                                                isFree = lesson.isFree
+                                            )
+                                        )
+                                    }
+                                )
+
+                                Spacer(modifier = Modifier.height(12.dp))
+                            }
+                        }
                     }
                 }
             }
@@ -95,9 +131,8 @@ private fun Preview() {
         LessonScreen(
             state = LessonStates(),
             onEvent = {},
-            navigateToPreviousScreen = {
-
-            }
+            navigateToPreviousScreen = {},
+            lessonOnClickEvent = MutableSharedFlow()
         )
     }
 }
