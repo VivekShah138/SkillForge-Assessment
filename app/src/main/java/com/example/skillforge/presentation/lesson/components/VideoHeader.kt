@@ -5,7 +5,6 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
-import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.outlined.Fullscreen
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Text
@@ -13,7 +12,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.tooling.preview.Preview
@@ -25,7 +23,9 @@ import com.example.skillforge.domain.model.dummyLessons
 
 @Composable
 fun VideoHeader(
-    imageUrl: String
+    imageUrl: String,
+    onBackClick: () -> Unit,
+    onFullScreenClick: () -> Unit
 ) {
     Box(
         modifier = Modifier
@@ -68,8 +68,18 @@ fun VideoHeader(
                 .padding(16.dp),
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
-            CircleIcon(Icons.AutoMirrored.Filled.ArrowBack)
-            CircleIcon(Icons.Outlined.Fullscreen)
+            CircleIcon(
+                Icons.AutoMirrored.Filled.ArrowBack,
+                onIconClick = {
+                    onBackClick()
+                }
+            )
+            CircleIcon(
+                Icons.Outlined.Fullscreen,
+                onIconClick = {
+                    onFullScreenClick()
+                }
+            )
         }
 
         PlayButton(
@@ -89,6 +99,12 @@ fun VideoHeader(
 @Composable
 fun VideoHeaderPreview() {
     VideoHeader(
-        imageUrl = dummyCourses[0].thumbnailUrl
+        imageUrl = dummyCourses[0].thumbnailUrl,
+        onBackClick = {
+
+        },
+        onFullScreenClick = {
+
+        }
     )
 }

@@ -12,12 +12,20 @@ import com.example.skillforge.domain.model.dummyLessons
 
 
 @Composable
-fun LessonList(lessons: List<LessonModel>) {
+fun LessonList(
+    lessons: List<LessonModel>,
+    onLessonClick: (lessonId: String) -> Unit
+) {
     Column(
         verticalArrangement = Arrangement.spacedBy(12.dp)
     ) {
         lessons.forEach {
-            LessonCard(it)
+            LessonCard(
+                it,
+                onClick = {
+                    onLessonClick(it.id)
+                }
+            )
         }
     }
 }
@@ -26,5 +34,5 @@ fun LessonList(lessons: List<LessonModel>) {
 @Composable
 fun LessonListPreview() {
 
-    LessonList(dummyLessons)
+    LessonList(dummyLessons, onLessonClick = {})
 }

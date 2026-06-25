@@ -35,11 +35,15 @@ import com.example.skillforge.ui.theme.labelXSmall
 import com.example.skillforge.ui.theme.titleXSmall
 
 @Composable
-fun LessonCard(lesson: LessonModel) {
+fun LessonCard(
+    lesson: LessonModel,
+    onClick: () -> Unit
+) {
     Card(
         modifier = Modifier.fillMaxWidth(),
         shape = RoundedCornerShape(10.dp),
-        colors = CardDefaults.cardColors(containerColor = Color.White)
+        colors = CardDefaults.cardColors(containerColor = Color.White),
+        onClick = onClick
     ) {
         Row(
             modifier = Modifier.padding(16.dp),
@@ -112,6 +116,9 @@ fun LessonCard(lesson: LessonModel) {
 @Composable
 fun LessonPreview() {
     LessonCard(
-        dummyLessons[0]
+        dummyLessons[0],
+        onClick = {
+
+        }
     )
 }

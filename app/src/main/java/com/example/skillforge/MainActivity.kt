@@ -30,28 +30,44 @@ class MainActivity : ComponentActivity() {
             SkillforgeTheme {
                 val navController = rememberNavController()
 
-//                NavHost(
-//                    navController = navController,
-//                    startDestination = Screens.Home
-//                ) {
-//                    composable<Screens.Home> {
-//                        HomeRoot(
-//                            navigateToCourse = {
-//                                navController.navigate(Screens.CourseDetails(it))
-//                            }
-//                        )
-//                    }
-//
-//                    composable<Screens.CourseDetails> {
-//                        CourseDetailsRoot(
-//                            onBackClick = {
-//                                navController.popBackStack()
-//                            }
-//                        )
-//                    }
-//                }
+                NavHost(
+                    navController = navController,
+                    startDestination = Screens.Home
+                ) {
+                    composable<Screens.Home> {
+                        HomeRoot(
+                            navigateToCourse = {
+                                navController.navigate(Screens.CourseDetails(it))
+                            }
+                        )
+                    }
 
-                LessonRoot()
+                    composable<Screens.CourseDetails> {
+                        CourseDetailsRoot(
+                            onBackClick = {
+                                navController.popBackStack()
+                            },
+                            onLessonClick = { lessonId, courseId ->
+                                navController.navigate(
+                                    Screens.CourseLesson(
+                                        courseId = courseId,
+                                        lessonId = lessonId
+                                    )
+                                )
+                            }
+                        )
+                    }
+
+                    composable<Screens.CourseLesson> {
+                        LessonRoot(
+                            navigateToPreviousScreen = {
+                                navController.popBackStack()
+                            }
+                        )
+                    }
+                }
+
+
             }
         }
     }

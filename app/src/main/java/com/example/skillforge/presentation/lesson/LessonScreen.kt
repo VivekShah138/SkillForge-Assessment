@@ -8,8 +8,6 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.skillforge.ui.theme.SkillforgeTheme
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -18,19 +16,20 @@ import com.example.skillforge.domain.model.dummyCourses
 import com.example.skillforge.domain.model.dummyLessons
 import com.example.skillforge.presentation.lesson.components.LessonDetailsSection
 import com.example.skillforge.presentation.lesson.components.LessonList
-import com.example.skillforge.presentation.lesson.components.LessonRow
 import com.example.skillforge.presentation.lesson.components.LessonTabs
 import com.example.skillforge.presentation.lesson.components.VideoHeader
 
 @Composable
 fun LessonRoot(
-    viewModel: LessonViewModel = hiltViewModel()
+    viewModel: LessonViewModel = hiltViewModel(),
+    navigateToPreviousScreen: () -> Unit
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
 
     LessonScreen(
         state = state,
-        onEvent = viewModel::onEvent
+        onEvent = viewModel::onEvent,
+        navigateToPreviousScreen = navigateToPreviousScreen
     )
 }
 
@@ -38,6 +37,7 @@ fun LessonRoot(
 fun LessonScreen(
     state: LessonStates,
     onEvent: (LessonEvents) -> Unit,
+    navigateToPreviousScreen: () -> Unit
 ) {
     Scaffold(
 
@@ -50,7 +50,13 @@ fun LessonScreen(
         ) {
             Column {
                 VideoHeader(
-                    imageUrl = dummyCourses[0].thumbnailUrl
+                    imageUrl = dummyCourses[0].thumbnailUrl,
+                    onBackClick = {
+                        navigateToPreviousScreen()
+                    },
+                    onFullScreenClick = {
+
+                    },
                 )
 
                 Column(
@@ -80,7 +86,10 @@ private fun Preview() {
     SkillforgeTheme {
         LessonScreen(
             state = LessonStates(),
-            onEvent = {}
+            onEvent = {},
+            navigateToPreviousScreen = {
+                
+            }
         )
     }
 }

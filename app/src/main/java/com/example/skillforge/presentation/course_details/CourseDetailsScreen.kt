@@ -41,14 +41,16 @@ import com.example.skillforge.utils.toLessonSummary
 @Composable
 fun CourseDetailsRoot(
     viewModel: CourseDetailsViewModel = hiltViewModel(),
-    onBackClick: () -> Unit
+    onBackClick: () -> Unit,
+    onLessonClick: (lessonId: String, courseId: String) -> Unit
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
 
     CourseDetailsScreen(
         state = state,
         onEvent = viewModel::onEvent,
-        onBackClick = onBackClick
+        onBackClick = onBackClick,
+        onLessonClick = onLessonClick
     )
 }
 
@@ -56,7 +58,8 @@ fun CourseDetailsRoot(
 fun CourseDetailsScreen(
     state: CourseDetailsStates,
     onEvent: (CourseDetailsEvents) -> Unit,
-    onBackClick: () -> Unit
+    onBackClick: () -> Unit,
+    onLessonClick: (lessonId: String, courseId: String) -> Unit
 ) {
     Scaffold { paddingValues ->
         Surface(
@@ -110,7 +113,11 @@ fun CourseDetailsScreen(
 
                     Spacer(Modifier.height(16.dp))
 
-                    LessonList(lessons = dummyLessons)
+                    LessonList(lessons = dummyLessons, onLessonClick = {
+                        onLessonClick(
+                            it, "1"
+                        )
+                    })
                 }
 
                 BottomEnrollSection()
@@ -127,7 +134,10 @@ private fun Preview() {
             state = CourseDetailsStates(),
             onEvent = {},
             onBackClick = {
-                
+
+            },
+            onLessonClick = { _, _ ->
+
             }
         )
     }
