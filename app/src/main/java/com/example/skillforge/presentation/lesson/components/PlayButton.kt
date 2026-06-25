@@ -18,14 +18,15 @@ import androidx.compose.ui.unit.dp
 fun PlayButton(modifier: Modifier = Modifier) {
     Box(
         modifier = modifier
-            .size(72.dp)
+            .size(60.dp)
             .background(Color.White, CircleShape),
         contentAlignment = Alignment.Center
     ) {
         Icon(
             Icons.Default.PlayArrow,
             contentDescription = null,
-            tint = Color.Black
+            tint = Color.Black,
+            modifier = Modifier.size(30.dp)
         )
     }
 }
