@@ -40,6 +40,19 @@ class HomeViewModel @Inject constructor(
                 filterValuesOnSearch(searchQuery = events.searchQuery)
 
             }
+
+            is HomeEvents.ChangeFullSearchMode -> {
+                _state.update {
+                    it.copy(
+                        fullSearchMode = events.state,
+                        fullSearchModeType = events.type
+                    )
+                }
+            }
+
+            is HomeEvents.OnCancelClick -> {
+                _state.update { it.copy(searchValue = "") }
+            }
         }
     }
 

@@ -45,6 +45,11 @@ fun HomeScreen(
     navigateToCourse: (courseId: String) -> Unit
 ) {
     Scaffold(
+        topBar = {
+            if(state.fullSearchMode){
+
+            }
+        },
         containerColor = Color(0xFFF7F7F7)
     ) { paddingValues ->
 
@@ -111,6 +116,9 @@ fun NormalHomeScreen(
                 query = state.searchValue,
                 onQueryChange = {
                     onEvent(HomeEvents.OnValueSearch(it))
+                },
+                onCancelClick = {
+                    onEvent(HomeEvents.OnCancelClick)
                 }
             )
 
