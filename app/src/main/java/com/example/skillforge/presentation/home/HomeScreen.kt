@@ -11,6 +11,10 @@ import androidx.compose.material3.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import com.example.skillforge.domain.model.data_model.ErrorType
+import com.example.skillforge.domain.model.data_model.LoadingType
+import com.example.skillforge.presentation.core_components.error_screen.ErrorScreen
+import com.example.skillforge.presentation.core_components.loading_screen.LoadingScreen
 import com.example.skillforge.utils.dummyCategories
 import com.example.skillforge.utils.dummyCourses
 import com.example.skillforge.presentation.home.components.CategoryRow
@@ -18,6 +22,7 @@ import com.example.skillforge.presentation.home.components.CourseList
 import com.example.skillforge.presentation.home.components.HeaderSection
 import com.example.skillforge.presentation.home.components.CustomSearchBar
 import com.example.skillforge.presentation.home.components.SectionHeader
+import com.example.skillforge.utils.events.UiEvents
 
 @Composable
 fun HomeRoot(
@@ -42,54 +47,98 @@ fun HomeScreen(
     Scaffold(
         containerColor = Color(0xFFF7F7F7)
     ) { paddingValues ->
-        Surface(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(paddingValues = paddingValues),
-            color = Color(0xFFF7F7F7)
-        ) {
-            Column(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(24.dp)
-            ) {
-                HeaderSection()
 
-                Spacer(modifier = Modifier.height(20.dp))
-
-                CustomSearchBar()
-
-                Spacer(modifier = Modifier.height(28.dp))
-
-                SectionHeader(
-                    title = "Categories",
-                    onClick = {
-
-                    }
+        when (state.uiEvents) {
+            is UiEvents.NormalScreen -> {
+                NormalHomeScreen(
+                    paddingValues = paddingValues,
+                    state = state,
+                    onEvent = onEvent,
+                    navigateToCourse = navigateToCourse
                 )
+            }
 
-                Spacer(modifier = Modifier.height(16.dp))
-
-                CategoryRow(categories = state.categoryList)
-
-                Spacer(modifier = Modifier.height(24.dp))
-
-                SectionHeader(
-                    title = "Popular courses",
-                    onClick = {
-
-                    }
-                )
-
-                Spacer(modifier = Modifier.height(16.dp))
-
-                CourseList(
-                    courses = state.courseList,
-                    onClick = {
-                        navigateToCourse(it)
+            is UiEvents.Error -> {
+                ErrorScreen(
+                    errorType = ErrorType.GENERAL_ERROR,
+                    onRetryClick = {
+                        onEvent(HomeEvents.OnClickRetry)
                     }
                 )
             }
+
+            is UiEvents.NoInternet -> {
+                ErrorScreen(
+                    errorType = ErrorType.NO_INTERNET,
+                    onRetryClick = {
+                        onEvent(HomeEvents.OnClickRetry)
+                    }
+                )
+            }
+
+            is UiEvents.IsLoading -> {
+                LoadingScreen(
+                    type = LoadingType.HOME
+                )
+            }
+        }
+    }
+}
+
+@Composable
+fun NormalHomeScreen(
+    paddingValues: PaddingValues,
+    state: HomeStates,
+    onEvent: (HomeEvents) -> Unit,
+    navigateToCourse: (courseId: String) -> Unit
+) {
+    Surface(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(paddingValues = paddingValues),
+        color = Color(0xFFF7F7F7)
+    ) {
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(24.dp)
+        ) {
+            HeaderSection()
+
+            Spacer(modifier = Modifier.height(20.dp))
+
+            CustomSearchBar()
+
+            Spacer(modifier = Modifier.height(28.dp))
+
+            SectionHeader(
+                title = "Categories",
+                onClick = {
+
+                }
+            )
+
+            Spacer(modifier = Modifier.height(16.dp))
+
+            CategoryRow(categories = state.categoryList)
+
+            Spacer(modifier = Modifier.height(24.dp))
+
+            SectionHeader(
+                title = "Popular courses",
+                onClick = {
+
+                }
+            )
+
+            Spacer(modifier = Modifier.height(16.dp))
+
+            CourseList(
+                courses = state.courseList,
+                onClick = {
+                    navigateToCourse(it)
+                }
+            )
         }
     }
 }

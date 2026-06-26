@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.skillforge.domain.usecase.usecase_wrapper.HomeScreenUseCaseWrapper
 import com.example.skillforge.utils.Logger
+import com.example.skillforge.utils.events.UiEvents
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -28,12 +29,15 @@ class HomeViewModel @Inject constructor(
 
     fun onEvent(events: HomeEvents) {
         when (events) {
-            else -> TODO("Handle actions")
+            HomeEvents.OnClickRetry -> {
+                getData()
+            }
         }
     }
 
     fun getData() {
         viewModelScope.launch {
+            _state.update { it.copy(uiEvents = UiEvents.IsLoading) }
             val result = homeScreenUseCaseWrapper.getCategoriesRemoteUseCase()
 
             result.onSuccess { categoryList ->
@@ -51,10 +55,11 @@ class HomeViewModel @Inject constructor(
                     Logger.d(Logger.Tag.HOME_VIEWMODEL, "categoryModel => $categoryModel")
                     Logger.d(Logger.Tag.HOME_VIEWMODEL, "allCourse => $allCourses")
 
-
+                    _state.update { it.copy(uiEvents = UiEvents.NormalScreen) }
                 }
             }.onFailure { error ->
                 Logger.e(Logger.Tag.HOME_VIEWMODEL, "Error => ${error.localizedMessage}")
+                _state.update { it.copy(uiEvents = UiEvents.Error) }
             }
         }
     }
