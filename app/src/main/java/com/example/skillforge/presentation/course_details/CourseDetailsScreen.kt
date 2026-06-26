@@ -21,9 +21,6 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewModelScope
-import com.example.skillforge.utils.dummyCourses
-import com.example.skillforge.utils.dummyLessons
 import com.example.skillforge.presentation.course_details.components.BottomEnrollSection
 import com.example.skillforge.presentation.course_details.components.CourseBanner
 import com.example.skillforge.presentation.course_details.components.CourseContentHeader
