@@ -185,3 +185,21 @@ You can access the project deliverables here:
 * **Screen Recording**
 
 Drive Link: [Google Drive Folder](https://drive.google.com/drive/u/0/folders/1ulwoTsNNyKoUZyT7G8FMLZIEejZoMpZI?q=sharedwith%3Apublic+parent%3A1ulwoTsNNyKoUZyT7G8FMLZIEejZoMpZI&utm_source=chatgpt.com)
+
+---
+
+## Final Note 🚀
+
+By the way… this whole app was built in **just 24 hours** because that was the assessment deadline 😅
+
+So if you find any bugs, weird UI spacing, or a button that looks like it had an identity crisis at 3 AM… please be kind and forgive me.
+
+I was basically running on caffeine, determination, and questionable sleep decisions ☕💀
+
+That said, I gave it my best and had a lot of fun building it.
+
+If you find this project impressive, helpful, or just appreciate the 24-hour survival story — please consider leaving a ⭐ on the repo.
+
+Stars are like coffee for developers. They keep us alive.
+
+Thanks for checking out Skillforge ❤️
