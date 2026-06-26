@@ -51,7 +51,13 @@ class HomeViewModel @Inject constructor(
             }
 
             is HomeEvents.OnCancelClick -> {
-                _state.update { it.copy(searchValue = "") }
+                _state.update {
+                    it.copy(
+                        searchValue = "",
+                        filteredCourseList = state.value.courseList,
+                        filteredCategoryList = state.value.categoryList
+                    )
+                }
             }
         }
     }

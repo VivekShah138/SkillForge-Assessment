@@ -13,6 +13,7 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -33,11 +34,13 @@ fun CustomSearchBar(
             .height(56.dp),
         placeholder = {
             Text(
-                placeholderText,
+                text = placeholderText,
                 style = MaterialTheme.typography.labelXSmall.copy(
                     fontSize = 12.sp,
                     color = Color.Gray
-                )
+                ),
+                overflow = TextOverflow.Ellipsis,
+                maxLines = 1
             )
         },
         leadingIcon = {

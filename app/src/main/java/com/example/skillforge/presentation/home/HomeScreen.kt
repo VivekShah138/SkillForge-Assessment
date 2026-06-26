@@ -68,6 +68,10 @@ fun HomeScreen(
                                 type = state.fullSearchModeType
                             )
                         )
+
+                        onEvent(
+                            HomeEvents.OnCancelClick
+                        )
                     }
                 )
             }
@@ -82,8 +86,8 @@ fun HomeScreen(
                     FullSearchContent(
                         searchValue = state.searchValue,
                         searchMode = state.fullSearchModeType,
-                        categories = state.categoryList,
-                        courses = state.courseList,
+                        categories = state.filteredCategoryList,
+                        courses = state.filteredCourseList,
                         onSearchChange = {
                             onEvent(HomeEvents.OnValueSearch(it))
                         },
@@ -92,7 +96,8 @@ fun HomeScreen(
                         },
                         onCourseClick = {
                             navigateToCourse(it)
-                        }
+                        },
+                        paddingValues = paddingValues
                     )
                 } else {
                     NormalHomeScreen(
