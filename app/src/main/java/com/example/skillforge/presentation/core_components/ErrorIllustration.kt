@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.CloudOff
 import androidx.compose.material.icons.outlined.WifiOff
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
@@ -13,8 +14,31 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+
 @Composable
-fun NoInternetIllustration() {
+fun ErrorIllustration(
+    errorType: ErrorType = ErrorType.NO_INTERNET
+) {
+    val isGeneralError = errorType == ErrorType.GENERAL_ERROR
+
+    val mainColor = if (isGeneralError) {
+        Color(0xFFE53935) // error red
+    } else {
+        Color(0xFF2CC4BC) // teal
+    }
+
+    val lightColor = if (isGeneralError) {
+        Color(0xFFFF8A80) // light red
+    } else {
+        Color(0xFF8DE7E2) // light teal
+    }
+
+    val veryLightColor = if (isGeneralError) {
+        Color(0xFFFFEBEE) // very light red
+    } else {
+        Color(0xFFE8FAF9) // very light teal
+    }
+
     Box(
         modifier = Modifier
             .size(300.dp)
@@ -27,10 +51,7 @@ fun NoInternetIllustration() {
                 .size(110.dp)
                 .align(Alignment.BottomStart)
                 .offset((-25).dp, 25.dp)
-                .background(
-                    Color(0xFFF5F5F5),
-                    CircleShape
-                )
+                .background(veryLightColor, CircleShape)
         )
 
         Box(
@@ -38,33 +59,28 @@ fun NoInternetIllustration() {
                 .size(90.dp)
                 .align(Alignment.TopEnd)
                 .offset(20.dp, (-20).dp)
-                .background(
-                    Color(0xFFF3F7F7),
-                    CircleShape
-                )
+                .background(lightColor.copy(alpha = 0.25f), CircleShape)
         )
 
         Icon(
-            imageVector = Icons.Outlined.WifiOff,
+            imageVector = if (isGeneralError)
+                Icons.Outlined.CloudOff
+            else
+                Icons.Outlined.WifiOff,
             contentDescription = null,
             modifier = Modifier.size(110.dp),
-            tint = Color(0xFFB8C7C5)
-        )
-
-        Box(
-            modifier = Modifier
-                .size(14.dp)
-                .offset(x = 65.dp, y = (-55).dp)
-                .background(Color.Red, CircleShape)
+            tint = lightColor
         )
 
         Row(
-            modifier = Modifier.align(Alignment.Center).offset(y = 80.dp),
+            modifier = Modifier
+                .align(Alignment.Center)
+                .offset(y = 80.dp),
             horizontalArrangement = Arrangement.spacedBy(10.dp)
         ) {
-            Dot(Color(0xFF2CC4BC))
-            Dot(Color(0xFFC9D1D1))
-            Dot(Color(0xFFC9D1D1))
+            Dot(mainColor)
+            Dot(lightColor)
+            Dot(veryLightColor)
         }
     }
 }
@@ -72,5 +88,13 @@ fun NoInternetIllustration() {
 @Preview(showBackground = true)
 @Composable
 fun IllustrationPreview() {
-    NoInternetIllustration()
+    ErrorIllustration()
+}
+
+@Preview(showBackground = true)
+@Composable
+fun IllustrationPreview2() {
+    ErrorIllustration(
+        errorType = ErrorType.GENERAL_ERROR
+    )
 }

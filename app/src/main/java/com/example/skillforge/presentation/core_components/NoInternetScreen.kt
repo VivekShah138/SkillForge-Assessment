@@ -23,7 +23,7 @@ fun NoInternetScreen() {
         ) {
             Spacer(modifier = Modifier.height(120.dp))
 
-            NoInternetIllustration()
+            ErrorIllustration()
 
             Spacer(modifier = Modifier.height(56.dp))
 
