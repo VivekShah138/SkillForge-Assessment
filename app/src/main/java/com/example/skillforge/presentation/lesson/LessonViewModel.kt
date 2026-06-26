@@ -4,10 +4,14 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.toRoute
+import com.example.skillforge.domain.model.NetworkStatus
 import com.example.skillforge.domain.usecase.usecase_wrapper.LessonScreenUseCaseWrapper
 import com.example.skillforge.navigation.Screens
 import com.example.skillforge.utils.events.LessonOnClickEvent
 import com.example.skillforge.utils.Logger
+import com.example.skillforge.utils.events.CourseDetailsUiEvents
+import com.example.skillforge.utils.events.HomeScreenUiEvents
+import com.example.skillforge.utils.events.LessonUiEvents
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -38,7 +42,7 @@ class LessonViewModel @Inject constructor(
     private val lessonId = route.lessonId
 
     init {
-        getData()
+        monitorNetwork()
     }
 
     fun onEvent(events: LessonEvents) {
@@ -49,40 +53,74 @@ class LessonViewModel @Inject constructor(
                     isFree = events.isFree
                 )
             }
+
+            is LessonEvents.OnClickRetry -> {
+                monitorNetwork()
+            }
         }
     }
 
-    fun getData() {
+    private fun monitorNetwork() {
         viewModelScope.launch {
-            val result = lessonScreenUseCaseWrapper.getCategoriesRemoteUseCase()
-
-            result.onSuccess { categoryList ->
-                val allCourses = lessonScreenUseCaseWrapper.getCoursesFromCategoriesUseCase(
-                    categories = categoryList
-                )
-
-                val course = lessonScreenUseCaseWrapper.getCourseByIdUseCase(
-                    courseId = courseId,
-                    courseList = allCourses
-                )
-
-
-                if (course == null) return@launch
-
-                val selectedLesson = lessonScreenUseCaseWrapper.getSelectedLessonUseCase(
-                    lessonId = lessonId,
-                    lessonList = course.lessons,
-                )
-
-
-                _state.update { it.copy(selectedCourse = course, selectedLesson = selectedLesson) }
-
-                Logger.d(Logger.Tag.LESSON_VIEWMODEL, "selectedCourse => $course")
-                Logger.d(Logger.Tag.LESSON_VIEWMODEL, "selectedLesson => $selectedLesson")
-
-            }.onFailure { error ->
-                Logger.e(Logger.Tag.LESSON_VIEWMODEL, "Error => ${error.localizedMessage}")
+            lessonScreenUseCaseWrapper.networkMonitorLocalUseCase().collect { status ->
+                if (status == NetworkStatus.Available) {
+                    getData()
+                } else {
+                    _state.update { it.copy(lessonUiEvents = LessonUiEvents.NoInternet) }
+                }
             }
+        }
+    }
+
+    private suspend fun getData() {
+        _state.update { it.copy(lessonUiEvents = LessonUiEvents.Loading) }
+        val result = lessonScreenUseCaseWrapper.getCategoriesRemoteUseCase()
+
+        result.onSuccess { categoryList ->
+            val allCourses = lessonScreenUseCaseWrapper.getCoursesFromCategoriesUseCase(
+                categories = categoryList
+            )
+
+            val course = lessonScreenUseCaseWrapper.getCourseByIdUseCase(
+                courseId = courseId,
+                courseList = allCourses
+            )
+
+
+            if (course == null) {
+                _state.update { it.copy(lessonUiEvents = LessonUiEvents.Error) }
+                return
+            }
+
+            val selectedLesson = lessonScreenUseCaseWrapper.getSelectedLessonUseCase(
+                lessonId = lessonId,
+                lessonList = course.lessons,
+            )
+
+            if (selectedLesson == null) {
+                _state.update { it.copy(lessonUiEvents = LessonUiEvents.Error) }
+                return
+            }
+
+
+            _state.update {
+                it.copy(
+                    lessonUiEvents = LessonUiEvents.Success(
+                        course = course,
+                        selectedLesson = selectedLesson
+                    )
+                )
+            }
+
+            Logger.d(Logger.Tag.LESSON_VIEWMODEL, "selectedCourse => $course")
+            Logger.d(Logger.Tag.LESSON_VIEWMODEL, "selectedLesson => $selectedLesson")
+
+        }.onFailure { error ->
+            _state.update {
+                it.copy(lessonUiEvents = LessonUiEvents.Error)
+            }
+            Logger.e(Logger.Tag.LESSON_VIEWMODEL, "Error => ${error.localizedMessage}")
+
         }
     }
 
@@ -90,28 +128,43 @@ class LessonViewModel @Inject constructor(
         lessonId: String,
         isFree: Boolean
     ) {
-        val selectedCourse = state.value.selectedCourse
+        val currentState = state.value.lessonUiEvents
 
-        when {
-            selectedCourse != null && isFree -> {
-                val selectedLesson = lessonScreenUseCaseWrapper.getSelectedLessonUseCase(
-                    lessonId = lessonId,
-                    lessonList = selectedCourse.lessons
+        if (currentState !is LessonUiEvents.Success) {
+            _state.update {
+                it.copy(lessonUiEvents = LessonUiEvents.Error)
+            }
+            return
+        }
+
+        if (!isFree) {
+            viewModelScope.launch {
+                _lessonOnClickEvent.emit(
+                    LessonOnClickEvent.OnFailure(
+                        "This lesson is locked 🔒"
+                    )
                 )
-
-                _state.update { it.copy(selectedLesson = selectedLesson) }
             }
+            return
+        }
 
-            !isFree -> {
-                viewModelScope.launch {
-                    _lessonOnClickEvent.emit(LessonOnClickEvent.OnFailure("This lesson is locked 🔒"))
-                }
+        val selectedLesson =
+            lessonScreenUseCaseWrapper.getSelectedLessonUseCase(
+                lessonId = lessonId,
+                lessonList = currentState.course.lessons
+            )
+
+        if (selectedLesson != null) {
+            _state.update {
+                it.copy(
+                    lessonUiEvents = currentState.copy(
+                        selectedLesson = selectedLesson
+                    )
+                )
             }
-
-            else -> {
-                viewModelScope.launch {
-                    _lessonOnClickEvent.emit(LessonOnClickEvent.OnFailure("Error! Please try again later"))
-                }
+        } else {
+            _state.update {
+                it.copy(lessonUiEvents = LessonUiEvents.Error)
             }
         }
     }

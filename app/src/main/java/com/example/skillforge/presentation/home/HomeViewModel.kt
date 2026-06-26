@@ -35,7 +35,7 @@ class HomeViewModel @Inject constructor(
         }
     }
 
-    fun monitorNetwork() {
+    private fun monitorNetwork() {
         viewModelScope.launch {
             homeScreenUseCaseWrapper.networkMonitorLocalUseCase().collect { status ->
                 if (status == NetworkStatus.Available) {
@@ -47,7 +47,7 @@ class HomeViewModel @Inject constructor(
         }
     }
 
-    suspend fun getData() {
+    private suspend fun getData() {
         _state.update { it.copy(homeScreenUiEvents = HomeScreenUiEvents.Loading) }
         val result = homeScreenUseCaseWrapper.getCategoriesRemoteUseCase()
 

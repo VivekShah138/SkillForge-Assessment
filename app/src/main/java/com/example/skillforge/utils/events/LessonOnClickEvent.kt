@@ -1,5 +1,5 @@
 package com.example.skillforge.utils.events
 
-interface LessonOnClickEvent {
+sealed interface LessonOnClickEvent {
     data class OnFailure(val error: String) : LessonOnClickEvent
 }
