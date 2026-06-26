@@ -18,24 +18,6 @@ import androidx.compose.ui.unit.dp
 import com.example.skillforge.domain.model.CourseModel
 import com.example.skillforge.utils.dummyCourses
 
-//@Composable
-//fun CourseList(
-//    courses: List<CourseModel>,
-//    onClick: (courseId: String) -> Unit
-//) {
-//    LazyColumn(
-//        verticalArrangement = Arrangement.spacedBy(14.dp)
-//    ) {
-//        items(courses) {
-//            CourseCard(
-//                course = it,
-//                onClick = {
-//                    onClick(it.id)
-//                }
-//            )
-//        }
-//    }
-//}
 
 @Composable
 fun CourseList(

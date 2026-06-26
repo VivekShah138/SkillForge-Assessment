@@ -21,6 +21,9 @@ import com.example.skillforge.presentation.home.components.CategoryRow
 import com.example.skillforge.presentation.home.components.CourseList
 import com.example.skillforge.presentation.home.components.HeaderSection
 import com.example.skillforge.presentation.home.components.CustomSearchBar
+import com.example.skillforge.presentation.home.components.FullSearchContent
+import com.example.skillforge.presentation.home.components.FullSearchMode
+import com.example.skillforge.presentation.home.components.SearchTopBar
 import com.example.skillforge.presentation.home.components.SectionHeader
 import com.example.skillforge.utils.events.HomeScreenUiEvents
 
@@ -46,8 +49,27 @@ fun HomeScreen(
 ) {
     Scaffold(
         topBar = {
-            if(state.fullSearchMode){
+            if (state.fullSearchMode) {
+                SearchTopBar(
+                    mode = state.fullSearchModeType,
+                    itemCount = when (state.fullSearchModeType) {
+                        FullSearchMode.CATEGORY -> {
+                            state.categoryList.size
+                        }
 
+                        else -> {
+                            state.courseList.size
+                        }
+                    },
+                    onBackClick = {
+                        onEvent(
+                            HomeEvents.ChangeFullSearchMode(
+                                state = false,
+                                type = state.fullSearchModeType
+                            )
+                        )
+                    }
+                )
             }
         },
         containerColor = Color(0xFFF7F7F7)
@@ -55,12 +77,31 @@ fun HomeScreen(
 
         when (state.homeScreenUiEvents) {
             is HomeScreenUiEvents.Success -> {
-                NormalHomeScreen(
-                    paddingValues = paddingValues,
-                    state = state,
-                    onEvent = onEvent,
-                    navigateToCourse = navigateToCourse
-                )
+
+                if (state.fullSearchMode) {
+                    FullSearchContent(
+                        searchValue = state.searchValue,
+                        searchMode = state.fullSearchModeType,
+                        categories = state.categoryList,
+                        courses = state.courseList,
+                        onSearchChange = {
+                            onEvent(HomeEvents.OnValueSearch(it))
+                        },
+                        onCancelClick = {
+                            onEvent(HomeEvents.OnCancelClick)
+                        },
+                        onCourseClick = {
+                            navigateToCourse(it)
+                        }
+                    )
+                } else {
+                    NormalHomeScreen(
+                        paddingValues = paddingValues,
+                        state = state,
+                        onEvent = onEvent,
+                        navigateToCourse = navigateToCourse
+                    )
+                }
             }
 
             is HomeScreenUiEvents.Error -> {
@@ -127,7 +168,12 @@ fun NormalHomeScreen(
             SectionHeader(
                 title = "Categories",
                 onClick = {
-
+                    onEvent(
+                        HomeEvents.ChangeFullSearchMode(
+                            state = true,
+                            type = FullSearchMode.CATEGORY
+                        )
+                    )
                 }
             )
 
@@ -140,7 +186,12 @@ fun NormalHomeScreen(
             SectionHeader(
                 title = "Popular courses",
                 onClick = {
-
+                    onEvent(
+                        HomeEvents.ChangeFullSearchMode(
+                            state = true,
+                            type = FullSearchMode.COURSE
+                        )
+                    )
                 }
             )
 
