@@ -20,7 +20,7 @@ import androidx.compose.ui.unit.dp
 fun LoadingHeader() {
     Box(
         modifier = Modifier
-            .size(82.dp)
+            .size(50.dp)
             .clip(CircleShape)
             .background(Color(0xFFDDF7F4)),
         contentAlignment = Alignment.Center
@@ -29,7 +29,7 @@ fun LoadingHeader() {
             imageVector = Icons.Outlined.MenuBook,
             contentDescription = null,
             tint = Color(0xFF00695C),
-            modifier = Modifier.size(42.dp)
+            modifier = Modifier.size(30.dp)
         )
     }
 }

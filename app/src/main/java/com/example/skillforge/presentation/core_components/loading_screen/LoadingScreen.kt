@@ -1,6 +1,7 @@
 package com.example.skillforge.presentation.core_components.loading_screen
 
 import androidx.compose.foundation.layout.*
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.*
@@ -12,6 +13,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.skillforge.domain.model.data_model.LoadingType
+import com.example.skillforge.ui.theme.titleXSmall
 
 @Composable
 fun LoadingScreen(
@@ -39,28 +41,31 @@ fun LoadingScreen(
                 .padding(horizontal = 28.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Spacer(Modifier.height(80.dp))
+            Spacer(Modifier.height(20.dp))
 
             LoadingHeader()
 
-            Spacer(Modifier.height(32.dp))
+            Spacer(Modifier.height(20.dp))
 
             CircularLoader()
 
-            Spacer(Modifier.height(36.dp))
+            Spacer(Modifier.height(15.dp))
 
             Text(
-                title,
-                fontSize = 34.sp,
-                fontWeight = FontWeight.Bold
+                text = title,
+                style = MaterialTheme.typography.titleMedium.copy(
+                    fontWeight = FontWeight.Bold
+                )
             )
 
             Spacer(Modifier.height(12.dp))
 
             Text(
-                subtitle,
-                fontSize = 18.sp,
-                color = Color.Gray
+                text = subtitle,
+                style = MaterialTheme.typography.titleXSmall.copy(
+                    color = Color.Gray,
+                    fontWeight = FontWeight.SemiBold
+                )
             )
 
             Spacer(Modifier.height(48.dp))
