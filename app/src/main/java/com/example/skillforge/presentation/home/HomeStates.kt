@@ -8,6 +8,8 @@ import com.example.skillforge.utils.events.HomeScreenUiEvents
 data class HomeStates(
     val homeScreenUiEvents: HomeScreenUiEvents = HomeScreenUiEvents.Success,
     val categoryList: List<CategoryModel> = emptyList(),
-    val lessonList: List<LessonModel> = emptyList(),
     val courseList: List<CourseModel> = emptyList(),
+    val filteredCategoryList : List<CategoryModel> = emptyList(),
+    val filteredCourseList: List<CourseModel> = emptyList(),
+    val searchValue: String = ""
 )

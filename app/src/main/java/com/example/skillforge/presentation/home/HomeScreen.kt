@@ -107,7 +107,12 @@ fun NormalHomeScreen(
 
             Spacer(modifier = Modifier.height(20.dp))
 
-            CustomSearchBar()
+            CustomSearchBar(
+                query = state.searchValue,
+                onQueryChange = {
+                    onEvent(HomeEvents.OnValueSearch(it))
+                }
+            )
 
             Spacer(modifier = Modifier.height(28.dp))
 
@@ -120,7 +125,7 @@ fun NormalHomeScreen(
 
             Spacer(modifier = Modifier.height(16.dp))
 
-            CategoryRow(categories = state.categoryList)
+            CategoryRow(categories = state.filteredCategoryList)
 
             Spacer(modifier = Modifier.height(24.dp))
 
@@ -134,7 +139,7 @@ fun NormalHomeScreen(
             Spacer(modifier = Modifier.height(16.dp))
 
             CourseList(
-                courses = state.courseList,
+                courses = state.filteredCourseList,
                 onClick = {
                     navigateToCourse(it)
                 }
