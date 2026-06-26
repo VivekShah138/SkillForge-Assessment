@@ -1,4 +1,5 @@
 package com.example.skillforge.presentation.core_components
+
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
@@ -10,10 +11,13 @@ import androidx.compose.ui.unit.dp
 
 
 @Composable
-fun NoInternetScreen() {
+fun NoInternetScreen(
+    errorType: ErrorType = ErrorType.GENERAL_ERROR,
+    onRetryClick: () -> Unit
+) {
     Surface(
         modifier = Modifier.fillMaxSize(),
-        color =Color(0xFFF2FBFA)
+        color = Color(0xFFF2FBFA)
     ) {
         Column(
             modifier = Modifier
@@ -23,15 +27,21 @@ fun NoInternetScreen() {
         ) {
             Spacer(modifier = Modifier.height(120.dp))
 
-            ErrorIllustration()
+            ErrorIllustration(
+                errorType = errorType
+            )
 
             Spacer(modifier = Modifier.height(56.dp))
 
-            NoInternetText()
+            NoInternetText(
+                errorType = errorType
+            )
 
             Spacer(modifier = Modifier.height(56.dp))
 
-            RetryButton()
+            RetryButton(
+                onRetryClick = onRetryClick
+            )
         }
     }
 }
@@ -39,5 +49,9 @@ fun NoInternetScreen() {
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
 fun NoInternetScreenPreview() {
-    NoInternetScreen()
+    NoInternetScreen(
+        onRetryClick = {
+
+        }
+    )
 }

@@ -17,7 +17,7 @@ import androidx.compose.ui.unit.dp
 
 @Composable
 fun ErrorIllustration(
-    errorType: ErrorType = ErrorType.NO_INTERNET
+    errorType: ErrorType
 ) {
     val isGeneralError = errorType == ErrorType.GENERAL_ERROR
 
@@ -88,7 +88,9 @@ fun ErrorIllustration(
 @Preview(showBackground = true)
 @Composable
 fun IllustrationPreview() {
-    ErrorIllustration()
+    ErrorIllustration(
+        errorType = ErrorType.NO_INTERNET
+    )
 }
 
 @Preview(showBackground = true)

@@ -13,12 +13,17 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import kotlin.Unit
 
 
 @Composable
-fun RetryButton() {
+fun RetryButton(
+    onRetryClick: () -> Unit
+) {
     Button(
-        onClick = {},
+        onClick = {
+            onRetryClick()
+        },
         modifier = Modifier
             .fillMaxWidth()
             .height(64.dp),
@@ -44,5 +49,9 @@ fun RetryButton() {
 @Preview(showBackground = true)
 @Composable
 fun RetryPreview() {
-    RetryButton()
+    RetryButton(
+        onRetryClick = {
+
+        }
+    )
 }
