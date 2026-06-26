@@ -1,4 +1,4 @@
-package com.example.skillforge.presentation.core_components
+package com.example.skillforge.presentation.core_components.error_screen
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
@@ -14,6 +14,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.skillforge.domain.model.data_model.ErrorType
 
 @Composable
 fun ErrorIllustration(

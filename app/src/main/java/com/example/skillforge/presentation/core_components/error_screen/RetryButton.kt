@@ -1,4 +1,4 @@
-package com.example.skillforge.presentation.core_components
+package com.example.skillforge.presentation.core_components.error_screen
 
 
 import androidx.compose.foundation.layout.Spacer

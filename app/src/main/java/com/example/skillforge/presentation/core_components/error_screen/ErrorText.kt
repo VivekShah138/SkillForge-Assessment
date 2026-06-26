@@ -1,4 +1,4 @@
-package com.example.skillforge.presentation.core_components
+package com.example.skillforge.presentation.core_components.error_screen
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.MaterialTheme
@@ -11,10 +11,10 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
+import com.example.skillforge.domain.model.data_model.ErrorType
 
 @Composable
-fun NoInternetText(
+fun ErrorText(
     errorType: ErrorType
 ) {
     Column(
@@ -48,7 +48,7 @@ fun NoInternetText(
 @Preview(showBackground = true)
 @Composable
 fun TextPreview() {
-    NoInternetText(
+    ErrorText(
         errorType = ErrorType.NO_INTERNET
     )
 }
@@ -56,7 +56,7 @@ fun TextPreview() {
 @Preview(showBackground = true)
 @Composable
 fun TextPreview2() {
-    NoInternetText(
+    ErrorText(
         errorType = ErrorType.GENERAL_ERROR
     )
 }

@@ -1,4 +1,4 @@
-package com.example.skillforge.presentation.core_components
+package com.example.skillforge.presentation.core_components.error_screen
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Surface
@@ -8,10 +8,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.skillforge.domain.model.data_model.ErrorType
 
 
 @Composable
-fun NoInternetScreen(
+fun ErrorScreen(
     errorType: ErrorType = ErrorType.GENERAL_ERROR,
     onRetryClick: () -> Unit
 ) {
@@ -33,7 +34,7 @@ fun NoInternetScreen(
 
             Spacer(modifier = Modifier.height(56.dp))
 
-            NoInternetText(
+            ErrorText(
                 errorType = errorType
             )
 
@@ -48,8 +49,8 @@ fun NoInternetScreen(
 
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
-fun NoInternetScreenPreview() {
-    NoInternetScreen(
+fun ErrorScreenPreview() {
+    ErrorScreen(
         onRetryClick = {
 
         }
