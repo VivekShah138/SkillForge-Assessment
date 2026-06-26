@@ -1,14 +1,12 @@
 package com.example.skillforge.presentation.lesson
 
-import android.widget.Toast
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.toRoute
 import com.example.skillforge.domain.usecase.usecase_wrapper.LessonScreenUseCaseWrapper
 import com.example.skillforge.navigation.Screens
-import com.example.skillforge.utils.CourseDetailsNavigationEvent
-import com.example.skillforge.utils.LessonOnClickEvent
+import com.example.skillforge.utils.events.LessonOnClickEvent
 import com.example.skillforge.utils.Logger
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow

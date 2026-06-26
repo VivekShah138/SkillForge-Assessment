@@ -1,4 +1,4 @@
-package com.example.skillforge.utils
+package com.example.skillforge.utils.events
 
 interface CourseDetailsNavigationEvent {
     data object OnFailure : CourseDetailsNavigationEvent

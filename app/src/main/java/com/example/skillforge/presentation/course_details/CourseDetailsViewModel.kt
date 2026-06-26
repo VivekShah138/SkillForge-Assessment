@@ -6,7 +6,7 @@ import androidx.lifecycle.viewModelScope
 import androidx.navigation.toRoute
 import com.example.skillforge.domain.usecase.usecase_wrapper.CourseDetailsUseCaseWrapper
 import com.example.skillforge.navigation.Screens
-import com.example.skillforge.utils.CourseDetailsNavigationEvent
+import com.example.skillforge.utils.events.CourseDetailsNavigationEvent
 import com.example.skillforge.utils.Logger
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow

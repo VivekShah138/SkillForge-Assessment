@@ -21,7 +21,7 @@ import com.example.skillforge.presentation.lesson.components.LessonDetailsSectio
 import com.example.skillforge.presentation.lesson.components.LessonRow
 import com.example.skillforge.presentation.lesson.components.LessonTabs
 import com.example.skillforge.presentation.lesson.components.VideoHeader
-import com.example.skillforge.utils.LessonOnClickEvent
+import com.example.skillforge.utils.events.LessonOnClickEvent
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharedFlow
 
