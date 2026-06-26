@@ -17,25 +17,26 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.skillforge.domain.model.LessonTabs
 
 @Composable
 fun LessonTabs() {
     var selectedTab by remember { mutableIntStateOf(0) }
 
-    val tabs = listOf("Lessons", "Notes", "Resources")
+    val tabs = LessonTabs.entries
 
     Column {
         Row(
             horizontalArrangement = Arrangement.spacedBy(32.dp)
         ) {
-            tabs.forEachIndexed { index, title ->
+            tabs.forEachIndexed { index, tab ->
                 Column(
                     horizontalAlignment = Alignment.CenterHorizontally,
                     modifier = Modifier
                         .clickable { selectedTab = index }
                 ) {
                     Text(
-                        text = title,
+                        text = tab.displayName,
                         style = MaterialTheme.typography.titleSmall.copy(
                             fontWeight = if (selectedTab == index) FontWeight.Bold else FontWeight.Normal,
                             color = if (selectedTab == index) Color.Black else Color.Gray
