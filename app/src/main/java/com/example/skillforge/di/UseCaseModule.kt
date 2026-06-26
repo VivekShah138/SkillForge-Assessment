@@ -1,10 +1,12 @@
 package com.example.skillforge.di
 
+import com.example.skillforge.domain.repository.network.NetworkMonitor
 import com.example.skillforge.domain.repository.remote.CategoryRepository
 import com.example.skillforge.domain.usecase.remote.GetCategoriesRemoteUseCase
 import com.example.skillforge.domain.usecase.local.GetCourseByIdUseCase
 import com.example.skillforge.domain.usecase.local.GetCoursesFromCategoriesUseCase
 import com.example.skillforge.domain.usecase.local.GetSelectedLessonUseCase
+import com.example.skillforge.domain.usecase.local.NetworkMonitorLocalUseCase
 import com.example.skillforge.domain.usecase.usecase_wrapper.CourseDetailsUseCaseWrapper
 import com.example.skillforge.domain.usecase.usecase_wrapper.HomeScreenUseCaseWrapper
 import com.example.skillforge.domain.usecase.usecase_wrapper.LessonScreenUseCaseWrapper
@@ -22,27 +24,35 @@ object UseCaseModule {
     @Provides
     @Singleton
     fun provideHomeScreenUseCase(
-        categoryRepository: CategoryRepository
+        categoryRepository: CategoryRepository,
+        networkMonitor: NetworkMonitor
     ): HomeScreenUseCaseWrapper {
         return HomeScreenUseCaseWrapper(
             getCategoriesRemoteUseCase = GetCategoriesRemoteUseCase(
                 categoryRepository = categoryRepository,
             ),
-            getCoursesFromCategoriesUseCase = GetCoursesFromCategoriesUseCase()
+            getCoursesFromCategoriesUseCase = GetCoursesFromCategoriesUseCase(),
+            networkMonitorLocalUseCase = NetworkMonitorLocalUseCase(
+                networkMonitor = networkMonitor
+            )
         )
     }
 
     @Provides
     @Singleton
     fun provideCourseDetailsUseCase(
-        categoryRepository: CategoryRepository
+        categoryRepository: CategoryRepository,
+        networkMonitor: NetworkMonitor
     ): CourseDetailsUseCaseWrapper {
         return CourseDetailsUseCaseWrapper(
             getCategoriesRemoteUseCase = GetCategoriesRemoteUseCase(
                 categoryRepository = categoryRepository,
             ),
             getCoursesFromCategoriesUseCase = GetCoursesFromCategoriesUseCase(),
-            getCourseByIdUseCase = GetCourseByIdUseCase()
+            getCourseByIdUseCase = GetCourseByIdUseCase(),
+            networkMonitorLocalUseCase = NetworkMonitorLocalUseCase(
+                networkMonitor = networkMonitor
+            )
         )
     }
 
@@ -50,7 +60,8 @@ object UseCaseModule {
     @Provides
     @Singleton
     fun provideLessonsUseCase(
-        categoryRepository: CategoryRepository
+        categoryRepository: CategoryRepository,
+        networkMonitor: NetworkMonitor
     ): LessonScreenUseCaseWrapper {
         return LessonScreenUseCaseWrapper(
             getCategoriesRemoteUseCase = GetCategoriesRemoteUseCase(
@@ -58,7 +69,10 @@ object UseCaseModule {
             ),
             getCoursesFromCategoriesUseCase = GetCoursesFromCategoriesUseCase(),
             getCourseByIdUseCase = GetCourseByIdUseCase(),
-            getSelectedLessonUseCase = GetSelectedLessonUseCase()
+            getSelectedLessonUseCase = GetSelectedLessonUseCase(),
+            networkMonitorLocalUseCase = NetworkMonitorLocalUseCase(
+                networkMonitor = networkMonitor
+            )
         )
     }
 }
