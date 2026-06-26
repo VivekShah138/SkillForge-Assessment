@@ -6,4 +6,6 @@ sealed interface CourseDetailsEvents {
         val courseId: String,
         val isFree: Boolean
     ) : CourseDetailsEvents
+
+    data object OnClickRetry: CourseDetailsEvents
 }

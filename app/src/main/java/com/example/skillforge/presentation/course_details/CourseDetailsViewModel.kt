@@ -4,10 +4,12 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.toRoute
+import com.example.skillforge.domain.model.NetworkStatus
 import com.example.skillforge.domain.usecase.usecase_wrapper.CourseDetailsUseCaseWrapper
 import com.example.skillforge.navigation.Screens
 import com.example.skillforge.utils.events.CourseDetailsNavigationEvent
 import com.example.skillforge.utils.Logger
+import com.example.skillforge.utils.events.CourseDetailsUiEvents
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -39,7 +41,7 @@ class CourseDetailsViewModel @Inject constructor(
     private val courseId = route.courseId
 
     init {
-        getData()
+        monitorNetwork()
     }
 
     fun onEvent(events: CourseDetailsEvents) {
@@ -49,6 +51,10 @@ class CourseDetailsViewModel @Inject constructor(
                 lessonId = events.lessonId,
                 isFree = events.isFree
             )
+
+            CourseDetailsEvents.OnClickRetry -> {
+                monitorNetwork()
+            }
         }
     }
 
@@ -71,32 +77,48 @@ class CourseDetailsViewModel @Inject constructor(
                 )
             }
         }
+
     }
 
-    fun getData() {
+
+    fun monitorNetwork() {
         viewModelScope.launch {
-            val result = courseDetailsUseCaseWrapper.getCategoriesRemoteUseCase()
-
-            result.onSuccess { categoryList ->
-                categoryList.forEach { categoryModel ->
-                    val allCourses = courseDetailsUseCaseWrapper.getCoursesFromCategoriesUseCase(
-                        categories = categoryList
-                    )
-
-                    val course = courseDetailsUseCaseWrapper.getCourseByIdUseCase(
-                        courseId = courseId,
-                        courseList = allCourses
-                    )
-
-                    _state.update { it.copy(selectedCourse = course) }
-
-                    Logger.d(Logger.Tag.COURSE_DETAILS_VIEWMODEL, "selectedCourse => $course")
-
-
+            courseDetailsUseCaseWrapper.networkMonitorLocalUseCase().collect { status ->
+                if (status == NetworkStatus.Available) {
+                    getData()
+                } else {
+                    _state.update { it.copy(uiEvents = CourseDetailsUiEvents.NoInternet) }
                 }
-            }.onFailure { error ->
-                Logger.e(Logger.Tag.COURSE_DETAILS_VIEWMODEL, "Error => ${error.localizedMessage}")
             }
+        }
+    }
+
+    suspend fun getData() {
+        _state.update { it.copy(uiEvents = CourseDetailsUiEvents.Loading) }
+        val result = courseDetailsUseCaseWrapper.getCategoriesRemoteUseCase()
+
+        result.onSuccess { categoryList ->
+            val allCourses = courseDetailsUseCaseWrapper.getCoursesFromCategoriesUseCase(
+                categories = categoryList
+            )
+
+
+            val course = courseDetailsUseCaseWrapper.getCourseByIdUseCase(
+                courseId = courseId,
+                courseList = allCourses
+            )
+
+            if (course != null) {
+                Logger.d(Logger.Tag.COURSE_DETAILS_VIEWMODEL, "selectedCourse => $course")
+                _state.update { it.copy(uiEvents = CourseDetailsUiEvents.Success(course = course)) }
+            } else {
+                _state.update { it.copy(uiEvents = CourseDetailsUiEvents.Error) }
+            }
+
+
+        }.onFailure { error ->
+            Logger.e(Logger.Tag.COURSE_DETAILS_VIEWMODEL, "Error => ${error.localizedMessage}")
+            _state.update { it.copy(uiEvents = CourseDetailsUiEvents.Error) }
         }
     }
 }

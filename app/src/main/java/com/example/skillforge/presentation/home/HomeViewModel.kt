@@ -1,12 +1,11 @@
 package com.example.skillforge.presentation.home
 
-import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.skillforge.domain.model.NetworkStatus
 import com.example.skillforge.domain.usecase.usecase_wrapper.HomeScreenUseCaseWrapper
 import com.example.skillforge.utils.Logger
-import com.example.skillforge.utils.events.UiEvents
+import com.example.skillforge.utils.events.HomeScreenUiEvents
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -42,14 +41,14 @@ class HomeViewModel @Inject constructor(
                 if (status == NetworkStatus.Available) {
                     getData()
                 } else {
-                    _state.update { it.copy(uiEvents = UiEvents.NoInternet) }
+                    _state.update { it.copy(homeScreenUiEvents = HomeScreenUiEvents.NoInternet) }
                 }
             }
         }
     }
 
     suspend fun getData() {
-        _state.update { it.copy(uiEvents = UiEvents.IsLoading) }
+        _state.update { it.copy(homeScreenUiEvents = HomeScreenUiEvents.Loading) }
         val result = homeScreenUseCaseWrapper.getCategoriesRemoteUseCase()
 
         result.onSuccess { categoryList ->
@@ -67,11 +66,11 @@ class HomeViewModel @Inject constructor(
                 Logger.d(Logger.Tag.HOME_VIEWMODEL, "categoryModel => $categoryModel")
                 Logger.d(Logger.Tag.HOME_VIEWMODEL, "allCourse => $allCourses")
 
-                _state.update { it.copy(uiEvents = UiEvents.NormalScreen) }
+                _state.update { it.copy(homeScreenUiEvents = HomeScreenUiEvents.Success) }
             }
         }.onFailure { error ->
             Logger.e(Logger.Tag.HOME_VIEWMODEL, "Error => ${error.localizedMessage}")
-            _state.update { it.copy(uiEvents = UiEvents.Error) }
+            _state.update { it.copy(homeScreenUiEvents = HomeScreenUiEvents.Error) }
         }
     }
 }

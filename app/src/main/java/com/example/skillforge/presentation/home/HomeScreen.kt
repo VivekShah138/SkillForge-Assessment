@@ -22,7 +22,7 @@ import com.example.skillforge.presentation.home.components.CourseList
 import com.example.skillforge.presentation.home.components.HeaderSection
 import com.example.skillforge.presentation.home.components.CustomSearchBar
 import com.example.skillforge.presentation.home.components.SectionHeader
-import com.example.skillforge.utils.events.UiEvents
+import com.example.skillforge.utils.events.HomeScreenUiEvents
 
 @Composable
 fun HomeRoot(
@@ -48,8 +48,8 @@ fun HomeScreen(
         containerColor = Color(0xFFF7F7F7)
     ) { paddingValues ->
 
-        when (state.uiEvents) {
-            is UiEvents.NormalScreen -> {
+        when (state.homeScreenUiEvents) {
+            is HomeScreenUiEvents.Success -> {
                 NormalHomeScreen(
                     paddingValues = paddingValues,
                     state = state,
@@ -58,7 +58,7 @@ fun HomeScreen(
                 )
             }
 
-            is UiEvents.Error -> {
+            is HomeScreenUiEvents.Error -> {
                 ErrorScreen(
                     errorType = ErrorType.GENERAL_ERROR,
                     onRetryClick = {
@@ -67,7 +67,7 @@ fun HomeScreen(
                 )
             }
 
-            is UiEvents.NoInternet -> {
+            is HomeScreenUiEvents.NoInternet -> {
                 ErrorScreen(
                     errorType = ErrorType.NO_INTERNET,
                     onRetryClick = {
@@ -76,7 +76,7 @@ fun HomeScreen(
                 )
             }
 
-            is UiEvents.IsLoading -> {
+            is HomeScreenUiEvents.Loading -> {
                 LoadingScreen(
                     type = LoadingType.HOME
                 )
