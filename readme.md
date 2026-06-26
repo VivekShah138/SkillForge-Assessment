@@ -112,8 +112,6 @@ Open the project in **Android Studio** and sync Gradle.
 
 Run the app on:
 
-* Android Emulator
-  or
 * Physical Android Device
 
 Minimum recommended SDK: **Android 8+**
@@ -194,6 +192,5 @@ You can access the project deliverables here:
 
 * **Debug APK**
 * **Screen Recording**
-* **Additional Submission Files**
 
 Drive Link: [Google Drive Folder](https://drive.google.com/drive/u/0/folders/1ulwoTsNNyKoUZyT7G8FMLZIEejZoMpZI?q=sharedwith%3Apublic+parent%3A1ulwoTsNNyKoUZyT7G8FMLZIEejZoMpZI&utm_source=chatgpt.com)
