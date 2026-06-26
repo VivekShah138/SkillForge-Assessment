@@ -152,37 +152,28 @@ Please ensure this is configured before running the project.
 
 ## AI Tools Used
 
-* ChatGPT by OpenAI — Used for Jetpack Compose UI generation, debugging, architecture decisions, and
-  code refactoring.
-* Google Stitch — Used for generating and exporting screen designs.
+* ChatGPT by [OpenAI](https://openai.com?utm_source=chatgpt.com) — Used for Jetpack Compose UI generation, debugging, architecture decisions, and code refactoring.
+* [Google Stitch](https://stitch.withgoogle.com/?utm_source=chatgpt.com) — Used for generating and exporting screen designs.
 
 ## Example Prompts
 
-* *“Generate this Jetpack Compose screen with all imports and preview. Split every section into
-  separate composables.”*
+* *“Generate this Jetpack Compose screen with all imports and preview. Split every section into separate composables.”*
 * *“Make this search bar properly working using MVVM.”*
 * *“Update the filtered list based on category name, course tags, or course name.”*
-* *“Make this Jetpack Compose Row into proper clickable tab buttons with underline for selected
-  tab.”*
+* *“Make this Jetpack Compose Row into proper clickable tab buttons with underline for selected tab.”*
 * *“Help me refactor my Android app to follow clean architecture and SOLID principles.”*
 
 ## What AI Got Right
 
-AI significantly helped speed up development by converting design references into Jetpack Compose
-code, breaking large screens into reusable composables, assisting with MVVM state management, search
-filtering logic, and debugging UI/state-related issues.
+AI significantly helped speed up development by converting design references into Jetpack Compose code, breaking large screens into reusable composables, assisting with MVVM state management, search filtering logic, and debugging UI/state-related issues.
 
 ## What AI Got Wrong
 
-AI-generated code was helpful but not always perfect. Common issues included slightly incorrect
-spacing, padding, alignment, minor color mismatches, layout issues in complex UI sections, and
-occasionally missing imports.
+AI-generated code was helpful but not always perfect. Common issues included slightly incorrect spacing, padding, alignment, minor color mismatches, layout issues in complex UI sections, and occasionally missing imports. In some cases, the generated functionality was also incorrect—for example, the lesson tabs were initially implemented as a simple row with underlined selected text instead of fully functional clickable tabs. Similarly, the search bar was generated as a static UI component without actual filtering logic or state handling.
 
 ## How I Fixed It
 
-I manually refined the generated code by adjusting spacing, alignment, and colors to better match
-the intended design. I also refactored some AI-generated code for better maintainability and
-integrated it properly with the app’s actual state management.
+I manually refined the generated code by adjusting spacing, alignment, and colors to better match the intended design. For functionality issues, I provided additional context to the AI about the expected behavior—such as how lesson tab selection should update UI state and how the search bar should filter results dynamically through MVVM. I then integrated and refactored the generated code to ensure proper state management, maintainability, and clean architecture.
 
 ---
 
