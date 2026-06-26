@@ -6,7 +6,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.skillforge.domain.model.data_model.CategoryModel
+import com.example.skillforge.domain.model.CategoryModel
 import com.example.skillforge.utils.dummyCategories
 
 @Composable

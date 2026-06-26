@@ -1,9 +1,9 @@
 package com.example.skillforge.utils
 
-import com.example.skillforge.domain.model.data_model.CategoryModel
-import com.example.skillforge.domain.model.data_model.CourseModel
-import com.example.skillforge.domain.model.data_model.InstructorModel
-import com.example.skillforge.domain.model.data_model.LessonModel
+import com.example.skillforge.domain.model.CategoryModel
+import com.example.skillforge.domain.model.CourseModel
+import com.example.skillforge.domain.model.InstructorModel
+import com.example.skillforge.domain.model.LessonModel
 
 
 val dummyCategories = listOf(

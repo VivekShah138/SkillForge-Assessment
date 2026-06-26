@@ -2,9 +2,9 @@ package com.example.skillforge.di
 
 import com.example.skillforge.domain.repository.remote.CategoryRepository
 import com.example.skillforge.domain.usecase.remote.GetCategoriesRemoteUseCase
-import com.example.skillforge.domain.usecase.remote.GetCourseByIdUseCase
-import com.example.skillforge.domain.usecase.remote.GetCoursesFromCategoriesUseCase
-import com.example.skillforge.domain.usecase.remote.GetSelectedLessonUseCase
+import com.example.skillforge.domain.usecase.local.GetCourseByIdUseCase
+import com.example.skillforge.domain.usecase.local.GetCoursesFromCategoriesUseCase
+import com.example.skillforge.domain.usecase.local.GetSelectedLessonUseCase
 import com.example.skillforge.domain.usecase.usecase_wrapper.CourseDetailsUseCaseWrapper
 import com.example.skillforge.domain.usecase.usecase_wrapper.HomeScreenUseCaseWrapper
 import com.example.skillforge.domain.usecase.usecase_wrapper.LessonScreenUseCaseWrapper

@@ -1,7 +1,7 @@
 package com.example.skillforge.utils.mapper
 
-import com.example.skillforge.domain.model.data_model.CourseModel
-import com.example.skillforge.domain.model.response.CoursesResponse
+import com.example.skillforge.domain.model.CourseModel
+import com.example.skillforge.domain.dto_response.CoursesResponse
 
 fun CoursesResponse.toCourseModel(): CourseModel {
     return CourseModel(

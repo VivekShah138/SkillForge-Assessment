@@ -1,6 +1,6 @@
-package com.example.skillforge.domain.usecase.remote
+package com.example.skillforge.domain.usecase.local
 
-import com.example.skillforge.domain.model.data_model.CourseModel
+import com.example.skillforge.domain.model.CourseModel
 
 class GetCourseByIdUseCase {
 

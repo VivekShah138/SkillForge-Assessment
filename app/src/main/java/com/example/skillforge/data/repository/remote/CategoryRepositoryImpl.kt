@@ -1,7 +1,7 @@
 package com.example.skillforge.data.repository.remote
 
 import com.example.skillforge.data.data_source.remote.CategoryApi
-import com.example.skillforge.domain.model.data_model.CategoryModel
+import com.example.skillforge.domain.model.CategoryModel
 import com.example.skillforge.domain.repository.remote.CategoryRepository
 import com.example.skillforge.utils.mapper.toCategoryModel
 import javax.inject.Inject

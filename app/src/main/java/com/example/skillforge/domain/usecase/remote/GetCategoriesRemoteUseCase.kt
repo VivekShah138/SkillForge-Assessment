@@ -1,6 +1,6 @@
 package com.example.skillforge.domain.usecase.remote
 
-import com.example.skillforge.domain.model.data_model.CategoryModel
+import com.example.skillforge.domain.model.CategoryModel
 import com.example.skillforge.domain.repository.remote.CategoryRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext

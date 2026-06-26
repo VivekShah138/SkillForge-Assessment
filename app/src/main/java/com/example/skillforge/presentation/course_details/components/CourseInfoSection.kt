@@ -21,7 +21,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.skillforge.domain.model.data_model.CourseModel
+import com.example.skillforge.domain.model.CourseModel
 import com.example.skillforge.utils.dummyCourses
 import com.example.skillforge.ui.theme.SkillforgeTheme
 import com.example.skillforge.utils.mapper.toFormattedNumber

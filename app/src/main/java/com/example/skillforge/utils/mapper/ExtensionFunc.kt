@@ -2,7 +2,7 @@ package com.example.skillforge.utils.mapper
 
 import androidx.compose.ui.graphics.Color
 import androidx.core.graphics.toColorInt
-import com.example.skillforge.domain.model.data_model.LessonModel
+import com.example.skillforge.domain.model.LessonModel
 import java.text.NumberFormat
 import java.util.Locale
 

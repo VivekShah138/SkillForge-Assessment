@@ -1,7 +1,7 @@
-package com.example.skillforge.domain.usecase.remote
+package com.example.skillforge.domain.usecase.local
 
-import com.example.skillforge.domain.model.data_model.LessonModel
-import com.example.skillforge.domain.model.data_model.SelectedLesson
+import com.example.skillforge.domain.model.LessonModel
+import com.example.skillforge.domain.model.SelectedLesson
 
 class GetSelectedLessonUseCase {
 

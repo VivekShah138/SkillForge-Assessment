@@ -1,7 +1,6 @@
 package com.example.skillforge.data.data_source.remote
 
-import com.example.skillforge.domain.model.response.ApiResponse
-import com.example.skillforge.domain.model.response.CategoryResponse
+import com.example.skillforge.domain.dto_response.ApiResponse
 import retrofit2.Response
 import retrofit2.http.GET
 

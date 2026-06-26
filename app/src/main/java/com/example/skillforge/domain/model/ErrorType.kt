@@ -1,4 +1,4 @@
-package com.example.skillforge.domain.model.data_model
+package com.example.skillforge.domain.model
 
 enum class ErrorType(
     val heading: String,

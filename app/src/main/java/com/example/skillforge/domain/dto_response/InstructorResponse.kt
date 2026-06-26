@@ -1,4 +1,4 @@
-package com.example.skillforge.domain.model.response
+package com.example.skillforge.domain.dto_response
 
 import com.google.gson.annotations.SerializedName
 

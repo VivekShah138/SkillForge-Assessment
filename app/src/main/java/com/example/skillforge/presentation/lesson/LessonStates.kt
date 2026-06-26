@@ -1,8 +1,7 @@
 package com.example.skillforge.presentation.lesson
 
-import com.example.skillforge.domain.model.data_model.CourseModel
-import com.example.skillforge.domain.model.data_model.LessonModel
-import com.example.skillforge.domain.model.data_model.SelectedLesson
+import com.example.skillforge.domain.model.CourseModel
+import com.example.skillforge.domain.model.SelectedLesson
 
 data class LessonStates(
     val isLoading: Boolean = false,

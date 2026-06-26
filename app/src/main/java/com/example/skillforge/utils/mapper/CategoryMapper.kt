@@ -1,7 +1,7 @@
 package com.example.skillforge.utils.mapper
 
-import com.example.skillforge.domain.model.data_model.CategoryModel
-import com.example.skillforge.domain.model.response.CategoryResponse
+import com.example.skillforge.domain.model.CategoryModel
+import com.example.skillforge.domain.dto_response.CategoryResponse
 
 fun CategoryResponse.toCategoryModel(): CategoryModel {
     return CategoryModel(

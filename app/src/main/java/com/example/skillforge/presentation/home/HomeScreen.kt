@@ -11,8 +11,8 @@ import androidx.compose.material3.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import com.example.skillforge.domain.model.data_model.ErrorType
-import com.example.skillforge.domain.model.data_model.LoadingType
+import com.example.skillforge.domain.model.ErrorType
+import com.example.skillforge.domain.model.LoadingType
 import com.example.skillforge.presentation.core_components.error_screen.ErrorScreen
 import com.example.skillforge.presentation.core_components.loading_screen.LoadingScreen
 import com.example.skillforge.utils.dummyCategories
