@@ -19,13 +19,14 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import com.example.skillforge.domain.model.CourseModel
 import com.example.skillforge.domain.model.ErrorType
+import com.example.skillforge.domain.model.LessonTabs
 import com.example.skillforge.domain.model.LoadingType
 import com.example.skillforge.domain.model.SelectedLesson
 import com.example.skillforge.presentation.core_components.error_screen.ErrorScreen
 import com.example.skillforge.presentation.core_components.loading_screen.LoadingScreen
 import com.example.skillforge.presentation.lesson.components.LessonDetailsSection
 import com.example.skillforge.presentation.lesson.components.LessonRow
-import com.example.skillforge.presentation.lesson.components.LessonTabs
+import com.example.skillforge.presentation.lesson.components.LessonTabsUi
 import com.example.skillforge.presentation.lesson.components.VideoHeader
 import com.example.skillforge.utils.events.LessonOnClickEvent
 import com.example.skillforge.utils.events.LessonUiEvents
@@ -78,7 +79,8 @@ fun LessonScreen(
                     selectedLesson = state.lessonUiEvents.selectedLesson,
                     selectedCourse = state.lessonUiEvents.course,
                     onEvent = onEvent,
-                    navigateToPreviousScreen = navigateToPreviousScreen
+                    navigateToPreviousScreen = navigateToPreviousScreen,
+                    state = state
                 )
             }
 
@@ -116,6 +118,7 @@ fun LessonSuccessScreen(
     selectedCourse: CourseModel,
     onEvent: (LessonEvents) -> Unit,
     navigateToPreviousScreen: () -> Unit,
+    state: LessonStates,
 ) {
     Surface(
         modifier = Modifier
@@ -147,7 +150,12 @@ fun LessonSuccessScreen(
 
                 Spacer(modifier = Modifier.height(20.dp))
 
-                LessonTabs()
+                LessonTabsUi(
+                    selectedTab = state.selectedTab,
+                    onSelectTab = {
+                        onEvent(LessonEvents.OnClickTab(it))
+                    }
+                )
 
                 Spacer(modifier = Modifier.height(16.dp))
 

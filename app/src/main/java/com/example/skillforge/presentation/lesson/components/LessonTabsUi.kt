@@ -6,11 +6,6 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -20,26 +15,29 @@ import androidx.compose.ui.unit.dp
 import com.example.skillforge.domain.model.LessonTabs
 
 @Composable
-fun LessonTabs() {
-    var selectedTab by remember { mutableIntStateOf(0) }
-
+fun LessonTabsUi(
+    selectedTab: LessonTabs,
+    onSelectTab: (LessonTabs) -> Unit
+) {
     val tabs = LessonTabs.entries
 
     Column {
         Row(
             horizontalArrangement = Arrangement.spacedBy(32.dp)
         ) {
-            tabs.forEachIndexed { index, tab ->
+            tabs.forEach { tab ->
                 Column(
                     horizontalAlignment = Alignment.CenterHorizontally,
                     modifier = Modifier
-                        .clickable { selectedTab = index }
+                        .clickable {
+                            onSelectTab(tab)
+                        }
                 ) {
                     Text(
                         text = tab.displayName,
                         style = MaterialTheme.typography.titleSmall.copy(
-                            fontWeight = if (selectedTab == index) FontWeight.Bold else FontWeight.Normal,
-                            color = if (selectedTab == index) Color.Black else Color.Gray
+                            fontWeight = if (selectedTab == tab) FontWeight.Bold else FontWeight.Normal,
+                            color = if (selectedTab == tab) Color.Black else Color.Gray
                         )
                     )
 
@@ -50,7 +48,7 @@ fun LessonTabs() {
                             .width(60.dp)
                             .height(3.dp)
                             .background(
-                                if (selectedTab == index)
+                                if (selectedTab == tab)
                                     Color(0xFF00B8A9)
                                 else
                                     Color.Transparent
@@ -67,5 +65,10 @@ fun LessonTabs() {
 )
 @Composable
 fun TabsPreview() {
-    LessonTabs()
+    LessonTabsUi(
+        selectedTab = LessonTabs.LESSONS,
+        onSelectTab = {
+
+        }
+    )
 }

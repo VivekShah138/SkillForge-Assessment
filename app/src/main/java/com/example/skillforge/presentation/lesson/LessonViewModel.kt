@@ -4,6 +4,7 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.toRoute
+import com.example.skillforge.domain.model.LessonTabs
 import com.example.skillforge.domain.model.NetworkStatus
 import com.example.skillforge.domain.usecase.usecase_wrapper.LessonScreenUseCaseWrapper
 import com.example.skillforge.navigation.Screens
@@ -57,6 +58,32 @@ class LessonViewModel @Inject constructor(
             is LessonEvents.OnClickRetry -> {
                 monitorNetwork()
             }
+
+            is LessonEvents.OnClickTab -> {
+                onClickTab(tab = events.tab)
+            }
+        }
+    }
+
+    private fun onClickTab(tab: LessonTabs) {
+        val currentState = state.value.lessonUiEvents
+
+        if (currentState !is LessonUiEvents.Success) {
+            _state.update {
+                it.copy(lessonUiEvents = LessonUiEvents.Error)
+            }
+            return
+        }
+
+        if(tab != LessonTabs.LESSONS){
+            viewModelScope.launch {
+                _lessonOnClickEvent.emit(
+                    LessonOnClickEvent.OnFailure(
+                        "This section is locked 🔒"
+                    )
+                )
+            }
+            return
         }
     }
 
