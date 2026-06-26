@@ -84,7 +84,9 @@ fun CourseDetailsScreen(
             }
         }
     }
-    Scaffold { paddingValues ->
+    Scaffold(
+        containerColor = Color(0xFF0BB7A7)
+    ) { paddingValues ->
         when (state.uiEvents) {
             is CourseDetailsUiEvents.Success -> {
                 CourseDetailsSuccessScreen(
