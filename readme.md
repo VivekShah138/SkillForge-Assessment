@@ -185,3 +185,15 @@ occasionally missing imports.
 I manually refined the generated code by adjusting spacing, alignment, and colors to better match
 the intended design. I also refactored some AI-generated code for better maintainability and
 integrated it properly with the app’s actual state management.
+
+---
+
+## Demo / APK
+
+You can access the project deliverables here:
+
+* **Debug APK**
+* **Screen Recording**
+* **Additional Submission Files**
+
+Drive Link: [Google Drive Folder](https://drive.google.com/drive/u/0/folders/1ulwoTsNNyKoUZyT7G8FMLZIEejZoMpZI?q=sharedwith%3Apublic+parent%3A1ulwoTsNNyKoUZyT7G8FMLZIEejZoMpZI&utm_source=chatgpt.com)
